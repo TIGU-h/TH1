@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerController2 : MonoBehaviour
+public class PlayerMovementController : MonoBehaviour
 {
 
     [SerializeField] private float walkSpeed;
@@ -9,19 +9,17 @@ public class PlayerController2 : MonoBehaviour
     [SerializeField] private float smoothTime;
     [SerializeField] private Transform firstCamera;
     [SerializeField] private GameObject weapon;
+    [SerializeField] private float gravityMultiplier = 3.0f;
 
     private Animator animator;
     private float smoothVelocity;
     private CharacterController characterController;
 
     private float gravity = -9.81f;
-    [SerializeField] private float gravityMultiplier = 3.0f;
     private float velocity;
     private bool canJump = true;
     private bool canRotate = true;
-    private bool canAttack = true;
 
-    private bool firstAttack = true;
 
 
 
@@ -38,17 +36,13 @@ public class PlayerController2 : MonoBehaviour
 
         animator.SetBool("isGrounded", characterController.isGrounded);
 
-
-
-
         if (canRotate)
             ApplyRotation();
 
         if (Input.GetButton("Jump") && characterController.isGrounded && canJump)
             Jump();
 
-        if (Input.GetButtonDown("Fire1") && canAttack)
-            Attack();
+
 
 
 
@@ -100,40 +94,16 @@ public class PlayerController2 : MonoBehaviour
         canRotate = false;
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
-        if (horizontal != 0 || vertical != 0)
-        {
-            ApplyRotation();
-            animator.SetTrigger("jumpForward");
-            velocity = jumpForce;
 
-        }
-        else
-        {
-            animator.SetTrigger("jump");
-            velocity = jumpForce;
+        animator.SetTrigger("jump");
+        velocity = jumpForce;
 
-        }
+
         //animator.SetBool("walk", false);
         //animator.SetBool("run", false);
-
-
-
-
     }
 
-    public void Attack()
-    {
-        //canAttack = false;
-        if (firstAttack)
-        {
-            firstAttack = false;
-            animator.SetTrigger("firstAttack");
-        }
-        else
-        {
-            animator.SetTrigger("nextAttack");
-        }
-    }
+
 
 
 
@@ -142,15 +112,12 @@ public class PlayerController2 : MonoBehaviour
     {
         canJump = true;
         canRotate = true;
-        canAttack = true;
-        firstAttack = true;
 
     }
     public void ResetCanEverything()
     {
         canJump = false;
         canRotate = false;
-        canAttack = false;
     }
 
     //canRotate
@@ -161,21 +128,6 @@ public class PlayerController2 : MonoBehaviour
     public void ResetCanRotate()
     {
         canRotate = false;
-    }
-
-    //CanNormalAttack
-    public void SetCanAttack()
-    {
-        canAttack = true;
-    }
-    public void ResetNormal()
-    {
-        canAttack = false;
-    }
-
-    public void SetFirstAttack()
-    {
-        firstAttack = true;
     }
 
     public void WearponOn()
