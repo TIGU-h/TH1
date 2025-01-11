@@ -1,27 +1,24 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class ESpell
 {
-    // Кулдаун навика
+    [SerializeField]
     private float cooldown;
-    private float lastCastTime;
 
-    // Лямбда-функція, що задає логіку навику
+    private float lastCastTime;
     private Action spellAction;
 
-    // Масив префабів, які можна використовувати для навику
+    [SerializeField]
     private GameObject[] prefabs;
 
-    // Конструктор для створення навику
     public ESpell(float cooldown, Action spellAction, GameObject[] prefabs = null)
     {
         this.cooldown = cooldown;
         this.spellAction = spellAction;
         this.prefabs = prefabs ?? Array.Empty<GameObject>();
-        lastCastTime = -cooldown; // Дозволяє одразу використовувати навик після створення
+        lastCastTime = -cooldown;
     }
 
     // Метод для активації навику
@@ -50,4 +47,11 @@ public class ESpell
     {
         return prefabs;
     }
+
+    // Публічний метод для установки дії (Action) через код
+    public void SetAction(Action newAction)
+    {
+        spellAction = newAction;
+    }
 }
+
