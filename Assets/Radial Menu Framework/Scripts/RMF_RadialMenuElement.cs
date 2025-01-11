@@ -65,7 +65,7 @@ public class RMF_RadialMenuElement : MonoBehaviour {
 
             if (button.GetComponent<EventTrigger>() == null) {
                 t = button.gameObject.AddComponent<EventTrigger>();
-                t.delegates = new System.Collections.Generic.List<EventTrigger.Entry>();
+                t.triggers = new System.Collections.Generic.List<EventTrigger.Entry>();
             } else
                 t = button.GetComponent<EventTrigger>();
 
@@ -80,8 +80,8 @@ public class RMF_RadialMenuElement : MonoBehaviour {
             exit.eventID = EventTriggerType.PointerExit;
             exit.callback.AddListener((eventData) => { setParentMenuLable(""); });
 
-            t.delegates.Add(enter);
-            t.delegates.Add(exit);
+            t.triggers.Add(enter);
+            t.triggers.Add(exit);
 
 
 
