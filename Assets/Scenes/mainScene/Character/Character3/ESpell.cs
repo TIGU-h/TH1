@@ -7,11 +7,15 @@ public class ESpell
     [SerializeField]
     private float cooldown;
 
+    [SerializeField]
+    private GameObject[] prefabs;
+
+    [SerializeField]
+    public AnimationClip newAnimation;
+
     private float lastCastTime;
     private Action spellAction;
 
-    [SerializeField]
-    private GameObject[] prefabs;
 
     public ESpell(float cooldown, Action spellAction, GameObject[] prefabs = null)
     {
@@ -22,13 +26,14 @@ public class ESpell
     }
 
     // Метод для активації навику
-    public void Cast()
+    public void Cast(Animator animator)
     {
         if (IsOnCooldown())
         {
             Debug.Log("Spell is on cooldown!");
             return;
         }
+        animator.SetTrigger("e");
 
         lastCastTime = Time.time;
         spellAction?.Invoke();
@@ -52,6 +57,10 @@ public class ESpell
     public void SetAction(Action newAction)
     {
         spellAction = newAction;
+    }
+    public void ResetCoolDown()
+    {
+        lastCastTime = -cooldown;
     }
 }
 
