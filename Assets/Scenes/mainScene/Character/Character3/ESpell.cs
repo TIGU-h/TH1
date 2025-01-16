@@ -1,8 +1,9 @@
 using System;
 using UnityEngine;
 
-[System.Serializable]
-public class ESpell
+[System.Serializable, CreateAssetMenu(fileName ="E_Spell")]
+
+public class ESpell : ScriptableObject
 {
     [SerializeField]
     private float cooldown;
@@ -11,32 +12,39 @@ public class ESpell
     private GameObject[] prefabs;
 
     [SerializeField]
-    public AnimationClip newAnimation;
+    public AnimationClip newAnimationForPlayer;
 
+
+    [SerializeField] public SpellActionBase spellAction;
+
+
+    [HideInInspector] public GameObject playerWhoCasting;
     private float lastCastTime;
-    private Action spellAction;
 
 
-    public ESpell(float cooldown, Action spellAction, GameObject[] prefabs = null)
+    public void CopyFrom(ESpell eSpell)
     {
-        this.cooldown = cooldown;
-        this.spellAction = spellAction;
-        this.prefabs = prefabs ?? Array.Empty<GameObject>();
+        cooldown = eSpell.cooldown;
+        prefabs = eSpell.prefabs ?? Array.Empty<GameObject>();
+        newAnimationForPlayer = eSpell.newAnimationForPlayer;
+
         lastCastTime = -cooldown;
     }
 
     // Метод для активації навику
-    public void Cast(Animator animator)
+    public void Cast()
     {
         if (IsOnCooldown())
         {
             Debug.Log("Spell is on cooldown!");
             return;
         }
-        animator.SetTrigger("e");
+        spellAction.gameObject.SetActive(true);
+
+        playerWhoCasting.GetComponent<Animator>().SetTrigger("e");
 
         lastCastTime = Time.time;
-        spellAction?.Invoke();
+        spellAction.Cast(this);
 
         Debug.Log("Spell cast successfully!");
     }
@@ -53,11 +61,7 @@ public class ESpell
         return prefabs;
     }
 
-    // Публічний метод для установки дії (Action) через код
-    public void SetAction(Action newAction)
-    {
-        spellAction = newAction;
-    }
+
     public void ResetCoolDown()
     {
         lastCastTime = -cooldown;

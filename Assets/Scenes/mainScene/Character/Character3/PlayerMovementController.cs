@@ -3,10 +3,9 @@ using UnityEngine;
 public class PlayerMovementController : MonoBehaviour
 {
 
-    [SerializeField] private float walkSpeed;
-    [SerializeField] private float runSpeedScale;
+    //[SerializeField] private float walkSpeed;
+    //[SerializeField] private float runSpeedScale;
     [SerializeField] private float jumpForce;
-    [SerializeField] private float smoothTime;
     [SerializeField] private Transform firstCamera;
     [SerializeField] private GameObject weapon;
     [SerializeField] private float gravityMultiplier = 3.0f;
@@ -75,7 +74,7 @@ public class PlayerMovementController : MonoBehaviour
         {
 
             float rotationAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + firstCamera.eulerAngles.y;
-            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, rotationAngle, ref smoothVelocity, smoothTime);
+            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, rotationAngle, ref smoothVelocity, 0);
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
             animator.SetBool("walk", true);
             animator.SetBool("run", sprint);

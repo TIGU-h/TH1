@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Animations;
 using UnityEngine.Playables;
@@ -9,13 +10,25 @@ public class PlayerAttackAndSpellController : MonoBehaviour
     private bool canAttack = true;
     private Animator animator;
     private CharacterController characterController;
+
     [SerializeField]
-    private ESpell[] eSpells = new ESpell[4];
+    private ESpell[] eSpellsPrefabs;
+
     private ESpell activeESpell;
-    private float energy = 0;
+    private ESpell[] eSpells;
 
-    //public AnimationClip customAnimation; // Анімація, яку ви передаєте через інспектор
 
+    [SerializeField]
+    private GameObject placeForESpell;
+
+    [SerializeField]
+    private AnimationClip curentEspellanimation;
+
+    public GameObject test;
+
+    //private float energy = 0;
+
+    //public AnimationClip customAnimation; 
 
     void Start()
     {
@@ -23,39 +36,44 @@ public class PlayerAttackAndSpellController : MonoBehaviour
         characterController = GetComponent<CharacterController>();
 
 
-        eSpells[0].SetAction(()=>
+
+        eSpells = new ESpell[eSpellsPrefabs.Length];
+
+        for (int i = 0; i < eSpellsPrefabs.Length; i++)
         {
-            //eanim.Play();
-            eSpells[0].GetPrefabs()[0].SetActive(true);
-            eSpells[0].GetPrefabs()[0].GetComponent<ParticleSystem>().Play();
-            StartCoroutine(changeAnimatorSpeed(5.0f));
+            if (eSpellsPrefabs[i] != null)
+            {
+                eSpells[i] = ScriptableObject.CreateInstance<ESpell>();
+                eSpells[i].CopyFrom(eSpellsPrefabs[i]);
 
+                eSpells[i].spellAction = Instantiate(eSpellsPrefabs[i].spellAction.gameObject, placeForESpell.gameObject.transform).GetComponent<SpellActionBase>();
+                //eSpells[i].spellAction = Instantiate(test, placeForESpell.gameObject.transform).GetComponent<SpellActionBase>();
+                eSpells[i].spellAction.gameObject.SetActive(false);
 
+                eSpells[i].ResetCoolDown();
+                eSpells[i].playerWhoCasting = gameObject;
 
-        }); 
-        eSpells[0].ResetCoolDown();
+            }
+        }
+
         activeESpell = eSpells[0];
-    }
-    private IEnumerator changeAnimatorSpeed(float delay)
-    {
-        yield return new WaitForSeconds(eSpells[0].GetPrefabs()[0].GetComponent<ParticleSystem>().main.duration);
-        animator.speed = 2;
-        Debug.Log("Animator speed reset to 2");
-        yield return new WaitForSeconds(delay);
-        animator.speed = 1; // Повертаємо швидкість до 1
-        Debug.Log("Animator speed reset to 1");
-    }
+        //curentEspellanimation = activeESpell.newAnimationForPlayer;
+        changespellanim(activeESpell.newAnimationForPlayer);
 
+
+
+    }
 
     void Update()
     {
         if (Input.GetButtonDown("Fire1") && canAttack)
             Attack();
-        if(Input.GetButtonDown("eSpell"))
+        if (Input.GetButtonDown("eSpell"))
         {
+            activeESpell.spellAction.gameObject.SetActive(true);
+            Debug.Log("active: " + activeESpell.spellAction.gameObject.name);
 
-            eSpells[0].Cast(animator);
-
+            activeESpell.Cast();
         }
 
     }
@@ -76,9 +94,16 @@ public class PlayerAttackAndSpellController : MonoBehaviour
         canAttack = false;
     }
 
-    public void changespellanim(AnimationClip newAnimation)
+    public void ChangeActiveESpell(int index)
     {
-        string stateName = "idle";
+        index %= 4;
+        activeESpell = eSpells[index];
+        changespellanim(activeESpell.newAnimationForPlayer);
+    }
+
+    private void changespellanim(AnimationClip newAnimation)
+    {
+        string stateName = curentEspellanimation.name;
 
         // Отримуємо існуючий RuntimeAnimatorController
         var runtimeAnimatorController = animator.runtimeAnimatorController;
@@ -92,7 +117,7 @@ public class PlayerAttackAndSpellController : MonoBehaviour
 
 
         bool replaced = false;
-        
+
 
         for (int i = 0; i < overrides.Count; i++)
         {
