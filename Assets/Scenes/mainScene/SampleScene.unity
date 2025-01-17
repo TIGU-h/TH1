@@ -1140,7 +1140,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &60332873
 Transform:
   m_ObjectHideFlags: 0
@@ -2295,6 +2295,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boulder05_Snow (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 666182089757825122, guid: 3b50269e0fdc29447badd2757fcadf74, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4568225400322845297, guid: 3b50269e0fdc29447badd2757fcadf74, type: 3}
       propertyPath: m_LocalScale.x
       value: 2.2021
@@ -3195,7 +3199,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &173025135
 Transform:
   m_ObjectHideFlags: 0
@@ -3229,6 +3233,10 @@ PrefabInstance:
     - target: {fileID: 666182089757825122, guid: 3b50269e0fdc29447badd2757fcadf74, type: 3}
       propertyPath: m_Name
       value: Boulder05_Snow (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 666182089757825122, guid: 3b50269e0fdc29447badd2757fcadf74, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4568225400322845297, guid: 3b50269e0fdc29447badd2757fcadf74, type: 3}
       propertyPath: m_LocalScale.x
@@ -3607,7 +3615,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &186535858
 Transform:
   m_ObjectHideFlags: 0
@@ -3751,7 +3759,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &193223674
 Transform:
   m_ObjectHideFlags: 0
@@ -4881,7 +4889,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &263268588
 Transform:
   m_ObjectHideFlags: 0
@@ -4915,6 +4923,10 @@ PrefabInstance:
     - target: {fileID: 1210647616086520460, guid: 4d82e1f732800b14b85f691db56b8cd1, type: 3}
       propertyPath: m_Name
       value: Boulder03_Snow (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1210647616086520460, guid: 4d82e1f732800b14b85f691db56b8cd1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2780493723720761503, guid: 4d82e1f732800b14b85f691db56b8cd1, type: 3}
       propertyPath: m_LocalScale.x
@@ -5219,7 +5231,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &277651281
 Transform:
   m_ObjectHideFlags: 0
@@ -5597,6 +5609,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boulder01_Snow (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 3877763298148632001, guid: 23a0737a2bc62b641868f12205c70a6d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5618,6 +5634,10 @@ PrefabInstance:
     - target: {fileID: 666182089757825122, guid: 3b50269e0fdc29447badd2757fcadf74, type: 3}
       propertyPath: m_Name
       value: Boulder05_Snow (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 666182089757825122, guid: 3b50269e0fdc29447badd2757fcadf74, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4568225400322845297, guid: 3b50269e0fdc29447badd2757fcadf74, type: 3}
       propertyPath: m_LocalScale.x
@@ -5901,6 +5921,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boulder01_Snow (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 3877763298148632001, guid: 23a0737a2bc62b641868f12205c70a6d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6074,7 +6098,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &338993515
 Transform:
   m_ObjectHideFlags: 0
@@ -6554,6 +6578,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boulder04_Snow (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1820884190538556145, guid: 05efb203376729948a9b9a559fd0adc1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3395236239328809186, guid: 05efb203376729948a9b9a559fd0adc1, type: 3}
       propertyPath: m_LocalScale.x
       value: 2.2021
@@ -6705,6 +6733,10 @@ PrefabInstance:
     - target: {fileID: 1210647616086520460, guid: 4d82e1f732800b14b85f691db56b8cd1, type: 3}
       propertyPath: m_Name
       value: Boulder03_Snow
+      objectReference: {fileID: 0}
+    - target: {fileID: 1210647616086520460, guid: 4d82e1f732800b14b85f691db56b8cd1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2780493723720761503, guid: 4d82e1f732800b14b85f691db56b8cd1, type: 3}
       propertyPath: m_LocalScale.x
@@ -7467,7 +7499,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 438798786}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.055300407, y: -0.0000000060991168, z: 3.3780054e-10, w: 0.99846977}
+  m_LocalRotation: {x: 0.055300374, y: 0.000000041365634, z: -0.000000002291041, w: 0.99846977}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -7606,6 +7638,10 @@ PrefabInstance:
     - target: {fileID: 5540207841506254449, guid: 97aa3136a09bf454b8365e1d1e72f346, type: 3}
       propertyPath: m_Name
       value: Boulder02_Snow (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5540207841506254449, guid: 97aa3136a09bf454b8365e1d1e72f346, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8843271371141590114, guid: 97aa3136a09bf454b8365e1d1e72f346, type: 3}
       propertyPath: m_LocalScale.x
@@ -7762,7 +7798,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &462506102
 Transform:
   m_ObjectHideFlags: 0
@@ -7800,7 +7836,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &462624394
 Transform:
   m_ObjectHideFlags: 0
@@ -10489,6 +10525,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boulder02_Snow (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 5540207841506254449, guid: 97aa3136a09bf454b8365e1d1e72f346, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8843271371141590114, guid: 97aa3136a09bf454b8365e1d1e72f346, type: 3}
       propertyPath: m_LocalScale.x
       value: 2.2021
@@ -10792,7 +10832,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &658799659
 Transform:
   m_ObjectHideFlags: 0
@@ -11053,6 +11093,10 @@ PrefabInstance:
     - target: {fileID: 666182089757825122, guid: 3b50269e0fdc29447badd2757fcadf74, type: 3}
       propertyPath: m_Name
       value: Boulder05_Snow
+      objectReference: {fileID: 0}
+    - target: {fileID: 666182089757825122, guid: 3b50269e0fdc29447badd2757fcadf74, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4568225400322845297, guid: 3b50269e0fdc29447badd2757fcadf74, type: 3}
       propertyPath: m_LocalScale.x
@@ -11592,14 +11636,14 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 0.8, g: 0.76862746, b: 0.6745098, a: 1}
+  m_Color: {r: 0.8, g: 0.79887575, b: 0.6745098, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -11627,12 +11671,12 @@ Light:
   m_Cookie: {fileID: 0}
   m_DrawHalo: 0
   m_Flare: {fileID: 0}
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 1
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -12191,7 +12235,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &748259324
 Transform:
   m_ObjectHideFlags: 0
@@ -12303,7 +12347,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &752867448
 Transform:
   m_ObjectHideFlags: 0
@@ -13283,7 +13327,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &838904356
 Transform:
   m_ObjectHideFlags: 0
@@ -13321,7 +13365,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &845269168
 Transform:
   m_ObjectHideFlags: 0
@@ -14006,7 +14050,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &914534691
 Transform:
   m_ObjectHideFlags: 0
@@ -14520,7 +14564,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &953666189
 Transform:
   m_ObjectHideFlags: 0
@@ -14706,7 +14750,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &973771300
 Transform:
   m_ObjectHideFlags: 0
@@ -14892,7 +14936,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &983872770
 Transform:
   m_ObjectHideFlags: 0
@@ -15004,7 +15048,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &994034456
 Transform:
   m_ObjectHideFlags: 0
@@ -15096,6 +15140,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boulder01_Snow (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 3877763298148632001, guid: 23a0737a2bc62b641868f12205c70a6d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -15121,7 +15169,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1011256664
 Transform:
   m_ObjectHideFlags: 0
@@ -15581,6 +15629,10 @@ PrefabInstance:
     - target: {fileID: 3877763298148632001, guid: 23a0737a2bc62b641868f12205c70a6d, type: 3}
       propertyPath: m_Name
       value: Boulder01_Snow (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3877763298148632001, guid: 23a0737a2bc62b641868f12205c70a6d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -16108,6 +16160,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boulder05_Snow (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 666182089757825122, guid: 3b50269e0fdc29447badd2757fcadf74, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4568225400322845297, guid: 3b50269e0fdc29447badd2757fcadf74, type: 3}
       propertyPath: m_LocalScale.x
       value: 2.2021
@@ -16189,7 +16245,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1097998110
 Transform:
   m_ObjectHideFlags: 0
@@ -16655,6 +16711,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boulder01_Snow (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 3877763298148632001, guid: 23a0737a2bc62b641868f12205c70a6d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -16680,7 +16740,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1121619489
 Transform:
   m_ObjectHideFlags: 0
@@ -16792,7 +16852,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1129754622
 Transform:
   m_ObjectHideFlags: 0
@@ -16904,7 +16964,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1148586819
 Transform:
   m_ObjectHideFlags: 0
@@ -17452,7 +17512,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1190846460
 Transform:
   m_ObjectHideFlags: 0
@@ -17490,7 +17550,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1191350631
 Transform:
   m_ObjectHideFlags: 0
@@ -17528,7 +17588,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1198992918
 Transform:
   m_ObjectHideFlags: 0
@@ -17709,7 +17769,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1220278675
 Transform:
   m_ObjectHideFlags: 0
@@ -18190,7 +18250,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1266538845}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.055300374, y: 0.000000041365634, z: -0.000000002291041, w: 0.99846977}
+  m_LocalRotation: {x: 0.05530039, y: 0.000000007498417, z: -4.1530085e-10, w: 0.99846977}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -18547,7 +18607,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1278369497
 Transform:
   m_ObjectHideFlags: 0
@@ -18952,6 +19012,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boulder04_Snow (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 1820884190538556145, guid: 05efb203376729948a9b9a559fd0adc1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3395236239328809186, guid: 05efb203376729948a9b9a559fd0adc1, type: 3}
       propertyPath: m_LocalScale.x
       value: 2.2021
@@ -19104,6 +19168,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boulder05_Snow (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 666182089757825122, guid: 3b50269e0fdc29447badd2757fcadf74, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4568225400322845297, guid: 3b50269e0fdc29447badd2757fcadf74, type: 3}
       propertyPath: m_LocalScale.x
       value: 2.2021
@@ -19255,6 +19323,10 @@ PrefabInstance:
     - target: {fileID: 1820884190538556145, guid: 05efb203376729948a9b9a559fd0adc1, type: 3}
       propertyPath: m_Name
       value: Boulder04_Snow
+      objectReference: {fileID: 0}
+    - target: {fileID: 1820884190538556145, guid: 05efb203376729948a9b9a559fd0adc1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3395236239328809186, guid: 05efb203376729948a9b9a559fd0adc1, type: 3}
       propertyPath: m_LocalScale.x
@@ -19547,7 +19619,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1335246474
 Transform:
   m_ObjectHideFlags: 0
@@ -20653,7 +20725,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1359860634}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.055300374, y: 0.000000041365634, z: -0.000000002291041, w: 0.99846977}
+  m_LocalRotation: {x: 0.05530039, y: 0.000000007498418, z: -4.153009e-10, w: 0.99846977}
   m_LocalPosition: {x: 150.055, y: 9.8689995, z: 84.886}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -20821,6 +20893,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boulder03_Snow (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 1210647616086520460, guid: 4d82e1f732800b14b85f691db56b8cd1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2780493723720761503, guid: 4d82e1f732800b14b85f691db56b8cd1, type: 3}
       propertyPath: m_LocalScale.x
       value: 2.2021
@@ -20898,6 +20974,10 @@ PrefabInstance:
     - target: {fileID: 1820884190538556145, guid: 05efb203376729948a9b9a559fd0adc1, type: 3}
       propertyPath: m_Name
       value: Boulder04_Snow (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1820884190538556145, guid: 05efb203376729948a9b9a559fd0adc1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3395236239328809186, guid: 05efb203376729948a9b9a559fd0adc1, type: 3}
       propertyPath: m_LocalScale.x
@@ -22087,7 +22167,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1439004346
 Transform:
   m_ObjectHideFlags: 0
@@ -23601,6 +23681,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boulder01_Snow
       objectReference: {fileID: 0}
+    - target: {fileID: 3877763298148632001, guid: 23a0737a2bc62b641868f12205c70a6d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -23774,7 +23858,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1553253013
 Transform:
   m_ObjectHideFlags: 0
@@ -24105,6 +24189,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boulder05_Snow (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 666182089757825122, guid: 3b50269e0fdc29447badd2757fcadf74, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4568225400322845297, guid: 3b50269e0fdc29447badd2757fcadf74, type: 3}
       propertyPath: m_LocalScale.x
       value: 2.2021
@@ -24410,6 +24498,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boulder05_Snow (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 666182089757825122, guid: 3b50269e0fdc29447badd2757fcadf74, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4568225400322845297, guid: 3b50269e0fdc29447badd2757fcadf74, type: 3}
       propertyPath: m_LocalScale.x
       value: 2.2021
@@ -24618,6 +24710,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boulder01_Snow (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 3877763298148632001, guid: 23a0737a2bc62b641868f12205c70a6d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -24779,7 +24875,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1658637131
 Transform:
   m_ObjectHideFlags: 0
@@ -26355,7 +26451,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1782211115
 Transform:
   m_ObjectHideFlags: 0
@@ -26508,6 +26604,10 @@ PrefabInstance:
     - target: {fileID: 3877763298148632001, guid: 23a0737a2bc62b641868f12205c70a6d, type: 3}
       propertyPath: m_Name
       value: Boulder01_Snow (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3877763298148632001, guid: 23a0737a2bc62b641868f12205c70a6d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -26832,6 +26932,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1587474157}
+  - {fileID: 2129047671}
   - {fileID: 916225209}
   - {fileID: 1812313577}
   - {fileID: 18718348}
@@ -27776,6 +27877,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boulder02_Snow
       objectReference: {fileID: 0}
+    - target: {fileID: 5540207841506254449, guid: 97aa3136a09bf454b8365e1d1e72f346, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8843271371141590114, guid: 97aa3136a09bf454b8365e1d1e72f346, type: 3}
       propertyPath: m_LocalScale.x
       value: 2.2021
@@ -28005,7 +28110,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1890239699
 Transform:
   m_ObjectHideFlags: 0
@@ -28187,6 +28292,10 @@ PrefabInstance:
     - target: {fileID: 1210647616086520460, guid: 4d82e1f732800b14b85f691db56b8cd1, type: 3}
       propertyPath: m_Name
       value: Boulder03_Snow (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1210647616086520460, guid: 4d82e1f732800b14b85f691db56b8cd1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2780493723720761503, guid: 4d82e1f732800b14b85f691db56b8cd1, type: 3}
       propertyPath: m_LocalScale.x
@@ -29879,6 +29988,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boulder02_Snow (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5540207841506254449, guid: 97aa3136a09bf454b8365e1d1e72f346, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8843271371141590114, guid: 97aa3136a09bf454b8365e1d1e72f346, type: 3}
       propertyPath: m_LocalScale.x
       value: 2.2021
@@ -30182,7 +30295,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2088417916
 Transform:
   m_ObjectHideFlags: 0
@@ -30507,7 +30620,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2093326905
 Transform:
   m_ObjectHideFlags: 0
@@ -31052,6 +31165,80 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 2780493723720761503, guid: 4d82e1f732800b14b85f691db56b8cd1, type: 3}
   m_PrefabInstance: {fileID: 2128304596}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2129047670
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1806775954}
+    m_Modifications:
+    - target: {fileID: 6248765003192073794, guid: 7a7826b006761954ebc0cb6f934b58b9, type: 3}
+      propertyPath: m_Name
+      value: Water (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6248765003192073794, guid: 7a7826b006761954ebc0cb6f934b58b9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6248765003192073797, guid: 7a7826b006761954ebc0cb6f934b58b9, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 17.801731
+      objectReference: {fileID: 0}
+    - target: {fileID: 6248765003192073797, guid: 7a7826b006761954ebc0cb6f934b58b9, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 19.789354
+      objectReference: {fileID: 0}
+    - target: {fileID: 6248765003192073797, guid: 7a7826b006761954ebc0cb6f934b58b9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 311.6517
+      objectReference: {fileID: 0}
+    - target: {fileID: 6248765003192073797, guid: 7a7826b006761954ebc0cb6f934b58b9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 23.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6248765003192073797, guid: 7a7826b006761954ebc0cb6f934b58b9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 674.7404
+      objectReference: {fileID: 0}
+    - target: {fileID: 6248765003192073797, guid: 7a7826b006761954ebc0cb6f934b58b9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6248765003192073797, guid: 7a7826b006761954ebc0cb6f934b58b9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6248765003192073797, guid: 7a7826b006761954ebc0cb6f934b58b9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6248765003192073797, guid: 7a7826b006761954ebc0cb6f934b58b9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6248765003192073797, guid: 7a7826b006761954ebc0cb6f934b58b9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6248765003192073797, guid: 7a7826b006761954ebc0cb6f934b58b9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6248765003192073797, guid: 7a7826b006761954ebc0cb6f934b58b9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7a7826b006761954ebc0cb6f934b58b9, type: 3}
+--- !u!4 &2129047671 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6248765003192073797, guid: 7a7826b006761954ebc0cb6f934b58b9, type: 3}
+  m_PrefabInstance: {fileID: 2129047670}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2144474118
 PrefabInstance:
