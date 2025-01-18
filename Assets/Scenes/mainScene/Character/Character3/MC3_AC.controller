@@ -442,7 +442,7 @@ AnimatorStateMachine:
   m_EntryPosition: {x: 30, y: 90, z: 0}
   m_ExitPosition: {x: 790, y: 120, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
-  m_DefaultState: {fileID: 1402241218186945593}
+  m_DefaultState: {fileID: -4160165076837426075}
 --- !u!1102 &-3992944372936243325
 AnimatorState:
   serializedVersion: 6
@@ -824,10 +824,7 @@ AnimatorStateTransition:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 
-  m_Conditions:
-  - m_ConditionMode: 1
-    m_ConditionEvent: attack
-    m_EventTreshold: 0
+  m_Conditions: []
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -1155024335645058843}
   m_Solo: 0

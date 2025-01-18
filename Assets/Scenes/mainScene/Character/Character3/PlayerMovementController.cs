@@ -138,4 +138,13 @@ public class PlayerMovementController : MonoBehaviour
         weapon.SetActive(false);
     }
 
+    public void WearponTrailOn()
+    {
+        weapon.GetComponentInChildren<TrailRenderer>().emitting = true;
+    }
+    public void WearponTrailOFF()
+    {
+        weapon.GetComponentInChildren<TrailRenderer>().emitting = false;
+    }
+
 }
