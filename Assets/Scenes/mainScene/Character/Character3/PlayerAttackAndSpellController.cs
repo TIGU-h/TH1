@@ -115,30 +115,36 @@ public class PlayerAttackAndSpellController : MonoBehaviour
         var overrides = new List<KeyValuePair<AnimationClip, AnimationClip>>(overrideController.overridesCount);
         overrideController.GetOverrides(overrides);
 
+        int replaced = 0;
 
-        bool replaced = false;
-
-
-        for (int i = 0; i < overrides.Count; i++)
+        for(int l = 0; l<animator.layerCount; l++)
         {
-            //Debug.Log(runtimeAnimatorController.);
+            // Отримуємо список станів для кожного шару
+            var layerOverrides = new List<KeyValuePair<AnimationClip, AnimationClip>>(overrides);
+            overrideController.GetOverrides(layerOverrides);
 
-            if (overrides[i].Key.name == stateName)
+            for (int i = 0; i < layerOverrides.Count; i++)
             {
-                overrides[i] = new KeyValuePair<AnimationClip, AnimationClip>(overrides[i].Key, newAnimation);
-                replaced = true;
+                if (layerOverrides[i].Key.name == stateName)
+                {
+                    layerOverrides[i] = new KeyValuePair<AnimationClip, AnimationClip>(layerOverrides[i].Key, newAnimation);
+                    replaced++;
+                }
             }
+
+            // Замінюємо оригінальні оверрайди
+            overrideController.ApplyOverrides(layerOverrides);
         }
 
-        if (replaced)
+        if (replaced > 0)
         {
-            overrideController.ApplyOverrides(overrides);
             animator.runtimeAnimatorController = overrideController;
-            Debug.Log($"Animation for state '{stateName}' replaced with '{newAnimation.name}'");
+            Debug.Log($"Animation for state '{stateName}' replaced with '{newAnimation.name}' {replaced} times.");
         }
         else
         {
             Debug.LogError($"State '{stateName}' not found in the controller!");
         }
     }
+
 }
