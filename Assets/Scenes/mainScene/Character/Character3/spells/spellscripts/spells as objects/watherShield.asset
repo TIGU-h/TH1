@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0db83461d36d16a4bb02efb9024a55cd, type: 3}
   m_Name: watherShield
   m_EditorClassIdentifier: 
-  cooldown: 15
+  cooldown: 20
   prefabs: []
   newAnimationForPlayer: {fileID: 7400000, guid: 27aadbdd72785e44e9c3f09480c85064, type: 2}
   spellAction: {fileID: 2659912159211444857, guid: 071de082b6769194889e3769bca83f3a, type: 3}

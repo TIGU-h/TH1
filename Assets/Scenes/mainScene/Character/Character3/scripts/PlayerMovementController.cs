@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerMovementController : MonoBehaviour
@@ -41,10 +42,20 @@ public class PlayerMovementController : MonoBehaviour
         if (Input.GetButton("Jump") && characterController.isGrounded && canJump)
             Jump();
 
+        if (Input.GetButton("Enable cursor") )
+        {
+            canRotate = false;
+            //if(Cursor.lockState!=CursorLockMode.None)
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+        else
+        {
+            canRotate = true;
 
-
-
-
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
 
     }
     private void ApplyGravity()
@@ -96,10 +107,6 @@ public class PlayerMovementController : MonoBehaviour
 
         animator.SetTrigger("jump");
         velocity = jumpForce;
-
-
-        //animator.SetBool("walk", false);
-        //animator.SetBool("run", false);
     }
 
 
@@ -129,6 +136,8 @@ public class PlayerMovementController : MonoBehaviour
         canRotate = false;
     }
 
+    //Wearpon
+
     public void WearponOn()
     {
         weapon.SetActive(true);
@@ -136,6 +145,7 @@ public class PlayerMovementController : MonoBehaviour
     public void WeaponOff()
     {
         weapon.SetActive(false);
+
     }
 
     public void WearponTrailOn()
@@ -145,6 +155,13 @@ public class PlayerMovementController : MonoBehaviour
     public void WearponTrailOFF()
     {
         weapon.GetComponentInChildren<TrailRenderer>().emitting = false;
+    }
+
+    private IEnumerator InvokeWithDelay(System.Action method, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        method?.Invoke();
     }
 
 }

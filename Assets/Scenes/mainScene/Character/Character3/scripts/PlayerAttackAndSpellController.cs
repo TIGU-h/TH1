@@ -28,8 +28,6 @@ public class PlayerAttackAndSpellController : MonoBehaviour
 
     //private float energy = 0;
 
-    //public AnimationClip customAnimation; 
-
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -47,7 +45,6 @@ public class PlayerAttackAndSpellController : MonoBehaviour
                 eSpells[i].CopyFrom(eSpellsPrefabs[i]);
 
                 eSpells[i].spellAction = Instantiate(eSpellsPrefabs[i].spellAction.gameObject, placeForESpell.gameObject.transform).GetComponent<SpellActionBase>();
-                //eSpells[i].spellAction = Instantiate(test, placeForESpell.gameObject.transform).GetComponent<SpellActionBase>();
                 eSpells[i].spellAction.gameObject.SetActive(false);
 
                 eSpells[i].ResetCoolDown();
@@ -57,7 +54,6 @@ public class PlayerAttackAndSpellController : MonoBehaviour
         }
 
         activeESpell = eSpells[0];
-        //curentEspellanimation = activeESpell.newAnimationForPlayer;
         changespellanim(activeESpell.newAnimationForPlayer);
 
 
@@ -80,6 +76,7 @@ public class PlayerAttackAndSpellController : MonoBehaviour
 
     public void Attack()
     {
+        GetComponent<PlayerMovementController>().WearponOn();
         animator.SetTrigger("attack");
     }
 

@@ -39,9 +39,9 @@ public class ESpell : ScriptableObject
             Debug.Log("Spell is on cooldown!");
             return;
         }
-        spellAction.gameObject.SetActive(true);
-
         playerWhoCasting.GetComponent<Animator>().SetTrigger("e");
+
+        spellAction.gameObject.SetActive(true);
 
         lastCastTime = Time.time;
         spellAction.Cast(this);

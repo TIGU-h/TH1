@@ -7,21 +7,20 @@ public class UIController : MonoBehaviour
     [SerializeField] private GameObject tabBar;
     void Update()
     {
+        // Коли кнопка натискається
         if (Input.GetButton("changeSkillType"))
         {
             tabBar.SetActive(true);
             Cursor.lockState = CursorLockMode.None;
         }
-        else
+
+        // Коли кнопка відпускається
+        if (Input.GetButtonUp("changeSkillType"))
         {
             tabBar.SetActive(false);
             Cursor.lockState = CursorLockMode.Locked;
         }
 
-        
-    }
-    public void deb(char a)
-    {
-        Debug.Log(a);
+
     }
 }

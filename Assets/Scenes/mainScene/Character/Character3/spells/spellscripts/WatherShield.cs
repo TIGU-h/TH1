@@ -6,7 +6,8 @@ public class WatherShield : SpellActionBase
 {
     public override void Cast(ESpell eSpell)
     {
-        StartCoroutine(InvokeWithDelay(() => gameObject.SetActive(false), 10f));
+        transform.GetChild(0).gameObject.SetActive(true);
+        StartCoroutine(InvokeWithDelay(() => transform.GetChild(0).gameObject.SetActive(false), 10f));
         
     }
 
