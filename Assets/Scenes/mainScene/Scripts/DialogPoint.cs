@@ -6,21 +6,25 @@ using UnityEngine.UI;
 
 public class DialogPoint : MonoBehaviour
 {
+    public string DialogPointName;
     [SerializeField] private Phrase[] phrases;
     [SerializeField] private Text nameField;
     [SerializeField] private Text phraseField;
     [SerializeField] private float timePerCharacter = 0.05f;
+    [SerializeField] private GameObject dialogOnCanvas;
 
 
-    public void startDialog()
+    public void startDialogWithPlayer(PlayerDialogManager dialogManager)
     {
-        StartCoroutine(DisplayDialog());
+        StartCoroutine(DisplayDialog(dialogManager));
     }
 
 
 
-    public IEnumerator DisplayDialog()
+    public IEnumerator DisplayDialog(PlayerDialogManager dialogManager)
     {
+        dialogManager.InDialog = true;
+        dialogOnCanvas.SetActive(true);
         for (int i = 0; i < phrases.Length; i++)
         {
             nameField.text = phrases[i].name;
@@ -41,6 +45,8 @@ public class DialogPoint : MonoBehaviour
                 this.phraseField.text = string.Empty;
             }
         }
+        dialogOnCanvas.SetActive(false);
+        dialogManager.InDialog = false;
 
         Debug.Log("Діалог завершено");
     }
