@@ -41,7 +41,7 @@ public class DialogPoint : MonoBehaviour
                     yield return new WaitForSeconds(timePerCharacter);
                 }
 
-                yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
+                yield return new WaitUntil(() => Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.F));
                 this.phraseField.text = string.Empty;
             }
         }

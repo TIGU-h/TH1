@@ -42,19 +42,19 @@ public class PlayerMovementController : MonoBehaviour
         if (Input.GetButton("Jump") && characterController.isGrounded && canJump)
             Jump();
 
-        if (Input.GetButton("Enable cursor") )
+        if (Input.GetButton("Enable cursor"))
         {
             canRotate = false;
             //if(Cursor.lockState!=CursorLockMode.None)
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
+            //Cursor.lockState = CursorLockMode.None;
+            //Cursor.visible = true;
         }
         else
         {
             canRotate = true;
 
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
+            //Cursor.lockState = CursorLockMode.Locked;
+            //Cursor.visible = false;
         }
 
     }
