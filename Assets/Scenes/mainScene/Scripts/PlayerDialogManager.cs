@@ -15,6 +15,10 @@ public class PlayerDialogManager : MonoBehaviour
     [SerializeField] private Transform npcListParent;
     [SerializeField] private GameObject npcButtonPrefab;
 
+    public Text nameField;
+    public Text phraseField;
+    public GameObject dialogOnCanvas;
+
     private List<DialogPoint> nearbyNpcs = new List<DialogPoint>();
     private Dictionary<DialogPoint, GameObject> npcButtons = new Dictionary<DialogPoint, GameObject>();
 

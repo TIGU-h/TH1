@@ -8,10 +8,8 @@ public class DialogPoint : MonoBehaviour
 {
     public string DialogPointName;
     [SerializeField] private Phrase[] phrases;
-    [SerializeField] private Text nameField;
-    [SerializeField] private Text phraseField;
-    [SerializeField] private float timePerCharacter = 0.05f;
-    [SerializeField] private GameObject dialogOnCanvas;
+    float timePerCharacter = 0.05f;
+
 
 
     public void startDialogWithPlayer(PlayerDialogManager dialogManager)
@@ -24,11 +22,11 @@ public class DialogPoint : MonoBehaviour
     public IEnumerator DisplayDialog(PlayerDialogManager dialogManager)
     {
         dialogManager.InDialog = true;
-        dialogOnCanvas.SetActive(true);
+        dialogManager.dialogOnCanvas.SetActive(true);
         for (int i = 0; i < phrases.Length; i++)
         {
-            nameField.text = phrases[i].name;
-            phraseField.text = string.Empty;
+            dialogManager.nameField.text = phrases[i].name;
+            dialogManager.phraseField.text = string.Empty;
 
             string[] characterPhrases = phrases[i].phrases;
 
@@ -37,15 +35,15 @@ public class DialogPoint : MonoBehaviour
 
                 for (int j = 0; j < phrase.Length; j++)
                 {
-                    this.phraseField.text += phrase[j];
+                    dialogManager.phraseField.text += phrase[j];
                     yield return new WaitForSeconds(timePerCharacter);
                 }
 
                 yield return new WaitUntil(() => Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.F));
-                this.phraseField.text = string.Empty;
+                dialogManager.phraseField.text = string.Empty;
             }
         }
-        dialogOnCanvas.SetActive(false);
+        dialogManager.dialogOnCanvas.SetActive(false);
         dialogManager.InDialog = false;
 
         Debug.Log("Діалог завершено");
