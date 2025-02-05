@@ -67,7 +67,6 @@ public class PlayerAttackAndSpellController : MonoBehaviour
         if (Input.GetButtonDown("eSpell"))
         {
             activeESpell.spellAction.gameObject.SetActive(true);
-            Debug.Log("active: " + activeESpell.spellAction.gameObject.name);
 
             activeESpell.Cast();
         }
@@ -136,7 +135,6 @@ public class PlayerAttackAndSpellController : MonoBehaviour
         if (replaced > 0)
         {
             animator.runtimeAnimatorController = overrideController;
-            Debug.Log($"Animation for state '{stateName}' replaced with '{newAnimation.name}' {replaced} times.");
         }
         else
         {

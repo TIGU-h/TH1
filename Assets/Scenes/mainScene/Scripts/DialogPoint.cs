@@ -46,7 +46,6 @@ public class DialogPoint : MonoBehaviour
         dialogManager.dialogOnCanvas.SetActive(false);
         dialogManager.InDialog = false;
 
-        Debug.Log("Діалог завершено");
     }
 }
 

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyLoader : MonoBehaviour
@@ -7,18 +8,27 @@ public class EnemyLoader : MonoBehaviour
     public float LoadEnemyRadius = 10f;
     public LayerMask enemyLayer;
     private List<EnemyAI> detectedEnemes = new List<EnemyAI>();
-    private void Update()
+
+    private void Start()
     {
-        DetectEnemies();
+        StartCoroutine(UpdateNearbyNpcsCoroutine());
+    }
+
+    private IEnumerator UpdateNearbyNpcsCoroutine()
+    {
+        while (true)
+        {
+            DetectEnemies();
+            yield return new WaitForSeconds(0.2f);
+        }
     }
 
 
 
     private void DetectEnemies()
     {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, LoadEnemyRadius + 1, enemyLayer);
-        EnemyAI nearestEnemy = null;
-        float nearestDistance = float.MaxValue;
+        Collider[] colliders = Physics.OverlapSphere(transform.position, LoadEnemyRadius + 3, enemyLayer);
+
 
         foreach (Collider collider in colliders)
         {
@@ -30,30 +40,23 @@ public class EnemyLoader : MonoBehaviour
                 if (distance < LoadEnemyRadius && !detectedEnemes.Contains(enemy))
                 {
                     detectedEnemes.Add(enemy);
-                    enemy.loadEnemy(gameObject);
+                    enemy.LoadEnemy(gameObject);
                 }
-                else if(distance > LoadEnemyRadius && detectedEnemes.Contains(enemy))
-                {
-                    enemy.unloadEnemy();
-                    detectedEnemes.Remove(enemy);
-                }
+                
+
             }
         }
+        for (int i =0; i < detectedEnemes.Count;i++)
+        {
+            float distance = Vector3.Distance(transform.position, detectedEnemes[i].transform.position);
 
-        //if (nearestEnemy != detectedEnemy)
-        //{
-        //    if (detectedEnemy != null)
-        //    {
-        //        detectedEnemy.unloadEnemy();
-        //    }
-
-        //    detectedEnemy = nearestEnemy;
-
-        //    if (detectedEnemy != null)
-        //    {
-        //        detectedEnemy.loadEnemy(gameObject);
-        //    }
-        //}
+            if (distance > LoadEnemyRadius )
+            {
+                detectedEnemes[i].UnloadEnemy();
+                detectedEnemes.RemoveAt(i);
+                i--;
+            }
+        }
     }
     private void OnDrawGizmosSelected()
     {

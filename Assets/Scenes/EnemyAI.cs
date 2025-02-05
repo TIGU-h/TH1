@@ -9,12 +9,15 @@ public class EnemyAI : MonoBehaviour
     public float lookRadius = 10f;
     public float waitTime = 2f;
     public float speed = 3.5f;
+    public bool isLoaded = false;
 
     private Transform target;
     private NavMeshAgent agent;
     private int currentPatrolIndex = 0;
     private bool isChasing = false;
 
+    private Coroutine enemyIdleCoroutine;
+    private Coroutine patrolCoroutine;
 
     private void Start()
     {
@@ -22,21 +25,36 @@ public class EnemyAI : MonoBehaviour
     }
 
 
-
-    public void loadEnemy(GameObject player)
+    public void LoadEnemy(GameObject player)
     {
+        isLoaded = true;
         target = target == null ? player.transform : target;
-        StartCoroutine(EnemyIdleBehevior());
-        StartCoroutine(PatrolRoutine());
+
+        if (enemyIdleCoroutine == null)
+            enemyIdleCoroutine = StartCoroutine(EnemyIdleBehevior());
+
+        if (patrolCoroutine == null)
+            patrolCoroutine = StartCoroutine(PatrolRoutine());
     }
 
-    public void unloadEnemy()
+    public void UnloadEnemy()
     {
         target = null;
-        StopCoroutine(EnemyIdleBehevior());
-        StopCoroutine(PatrolRoutine());
-        //StopAllCoroutines();
 
+        if (enemyIdleCoroutine != null)
+        {
+            StopCoroutine(enemyIdleCoroutine);
+            enemyIdleCoroutine = null;
+        }
+
+        if (patrolCoroutine != null)
+        {
+            StopCoroutine(patrolCoroutine);
+            patrolCoroutine = null;
+        }
+
+        StopAllCoroutines();
+        isLoaded = false;
     }
     private IEnumerator EnemyIdleBehevior()
     {
@@ -44,23 +62,6 @@ public class EnemyAI : MonoBehaviour
         {
 
             float distance = Vector3.Distance(target.position, transform.position);
-
-            //if (distance <= LookRadius)
-            //{
-
-            //    agent.SetDestination(transform.position);
-
-            //    if (distance <= agent.stoppingDistance)
-            //    {
-
-            //        LookTarget();
-
-            //    }
-
-            //}
-
-
-            // γος
             if (distance <= lookRadius)
             {
                 isChasing = true;
@@ -93,7 +94,6 @@ public class EnemyAI : MonoBehaviour
         {
             agent.SetDestination(patrolPoints[currentPatrolIndex].position);
             currentPatrolIndex = (currentPatrolIndex + 1) % patrolPoints.Length;
-            //Debug.Log("patrolPoints.Length = " + patrolPoints.Length);
             LookAt(patrolPoints[currentPatrolIndex].transform);
         }
     }
@@ -102,13 +102,13 @@ public class EnemyAI : MonoBehaviour
     {
         Vector3 direction = (lookAtTarget.position - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime );
     }
     void LookTarget()
     {
         Vector3 direction = (target.position - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime );
     }
     private void OnDrawGizmosSelected()
     {
