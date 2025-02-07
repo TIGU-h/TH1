@@ -5,16 +5,16 @@ using UnityEngine;
 
 public class EnemyLoader : MonoBehaviour
 {
-    public float LoadEnemyRadius = 10f;
-    public LayerMask enemyLayer;
-    private List<EnemyAI> detectedEnemes = new List<EnemyAI>();
+    [SerializeField] private float LoadEnemyRadius = 10f;
+    [SerializeField] private LayerMask enemyLayer;
+    private List<EnemyAIBase> detectedEnemes = new List<EnemyAIBase>();
 
     private void Start()
     {
-        StartCoroutine(UpdateNearbyNpcsCoroutine());
+        StartCoroutine(loadingEnemy());
     }
 
-    private IEnumerator UpdateNearbyNpcsCoroutine()
+    private IEnumerator loadingEnemy()
     {
         while (true)
         {
@@ -32,7 +32,7 @@ public class EnemyLoader : MonoBehaviour
 
         foreach (Collider collider in colliders)
         {
-            EnemyAI enemy = collider.GetComponent<EnemyAI>();
+            EnemyAIBase enemy = collider.GetComponent<EnemyAIBase>();
             if (enemy != null)
             {
                 float distance = Vector3.Distance(transform.position, enemy.transform.position);
