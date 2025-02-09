@@ -6,30 +6,26 @@ using Unity.VisualScripting;
 public class EnemyAIBase : MonoBehaviour
 {
     [SerializeField] private Transform[] patrolPoints; // Масив точок патрулювання
-    [SerializeField] private float lookRadius = 10f;
+    [SerializeField] protected float lookRadius = 10f;
     [SerializeField] private float rotspeed = 1f;
 
     public bool isLoaded = false;
 
-    private Transform target;
-    private NavMeshAgent agent;
+    protected Transform target;
+    protected NavMeshAgent agent;
     private int currentPatrolIndex = 0;
     private bool isChasing = false;
 
     private Coroutine enemyIdleCoroutine;
     private Coroutine patrolCoroutine;
 
-
-
-
-
     public AnimationClip idleClip;
     public AnimationClip runClip;
     public AnimationClip normalAttackClip;
     public AnimationClip heavyAttackClip;
 
-    private Animator animator;
-    private AnimatorOverrideController overrideController;
+    protected Animator animator;
+    protected AnimatorOverrideController overrideController;
 
     private void Start()
     {
@@ -102,9 +98,9 @@ public class EnemyAIBase : MonoBehaviour
         {
 
             float distance = Vector3.Distance(target.position, transform.position);
-            while (distance <= lookRadius)
+            if (distance <= lookRadius)
             {
-                FightLogic();
+                FightLogic(distance);
             }
             if (distance > lookRadius)
             {
@@ -115,10 +111,10 @@ public class EnemyAIBase : MonoBehaviour
             yield return new WaitForSeconds(1f);
         }
     }
-    protected void FightLogic()
+    protected virtual void FightLogic(float distance)
     {
+        print("base");
         isChasing = true;
-        //LookTarget();
         if (agent.remainingDistance < 3)
         {
             animator.SetTrigger("attack");
@@ -149,13 +145,13 @@ public class EnemyAIBase : MonoBehaviour
         }
     }
 
-    void LookAt(Transform lookAtTarget)
+    protected void LookAt(Transform lookAtTarget)
     {
         Vector3 direction = (lookAtTarget.position - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotspeed);
     }
-    void LookTarget()
+    protected void LookTarget()
     {
         Vector3 direction = (target.position - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));

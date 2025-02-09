@@ -9,8 +9,12 @@ public class EnemyLoader : MonoBehaviour
     [SerializeField] private LayerMask enemyLayer;
     private List<EnemyAIBase> detectedEnemes = new List<EnemyAIBase>();
 
+    public static System.Random random;
+
+
     private void Start()
     {
+        random = new System.Random();
         StartCoroutine(loadingEnemy());
     }
 
