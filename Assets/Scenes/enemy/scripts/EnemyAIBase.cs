@@ -17,7 +17,7 @@ public class EnemyAIBase : MonoBehaviour
     private bool isChasing = false;
 
     private Coroutine enemyIdleCoroutine;
-    private Coroutine patrolCoroutine;
+    private Coroutine LookAtTarget;
 
     public AnimationClip idleClip;
     public AnimationClip runClip;
@@ -39,7 +39,6 @@ public class EnemyAIBase : MonoBehaviour
             return;
         }
 
-        // Створюємо новий OverrideController на основі існуючого контролера
         overrideController = new AnimatorOverrideController(animator.runtimeAnimatorController);
         animator.runtimeAnimatorController = overrideController;
 
@@ -48,7 +47,6 @@ public class EnemyAIBase : MonoBehaviour
         ReplaceAnimationClip("normal attack", normalAttackClip);
         ReplaceAnimationClip("heavy attack", heavyAttackClip);
 
-        //overrideController.ApplyOverrides()
     }
 
     private void ReplaceAnimationClip(string tag, AnimationClip newClip)
@@ -87,15 +85,17 @@ public class EnemyAIBase : MonoBehaviour
             StopCoroutine(enemyIdleCoroutine);
             enemyIdleCoroutine = null;
         }
-
         StopAllCoroutines();
         isLoaded = false;
     }
+    
     private IEnumerator EnemyIdleBehevior()
     {
+        float delay = 1f;
         yield return new WaitForSeconds(0.1f);
         while (true)
         {
+
 
             float distance = Vector3.Distance(target.position, transform.position);
             if (distance <= lookRadius)
@@ -106,9 +106,10 @@ public class EnemyAIBase : MonoBehaviour
             {
                 isChasing = false;
                 Patrol();
+                delay = 1f;
             }
 
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(delay);
         }
     }
     protected virtual void FightLogic(float distance)
@@ -128,6 +129,7 @@ public class EnemyAIBase : MonoBehaviour
 
     private void Patrol()
     {
+
         if (patrolPoints.Length == 0 || isChasing)
         {
             animator.SetBool("walk", false);
@@ -139,7 +141,6 @@ public class EnemyAIBase : MonoBehaviour
                 animator.SetTrigger("start walk");
             animator.SetBool("walk", true);
 
-            //LookAt(patrolPoints[currentPatrolIndex].transform);
             agent.SetDestination(patrolPoints[currentPatrolIndex].position);
             currentPatrolIndex = (currentPatrolIndex + 1) % patrolPoints.Length;
         }
@@ -151,12 +152,7 @@ public class EnemyAIBase : MonoBehaviour
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotspeed);
     }
-    protected void LookTarget()
-    {
-        Vector3 direction = (target.position - transform.position).normalized;
-        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotspeed);
-    }
+
     private void OnDrawGizmosSelected()
     {
 
