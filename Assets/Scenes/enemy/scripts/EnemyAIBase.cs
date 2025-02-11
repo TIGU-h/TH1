@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.AI;
 using Unity.VisualScripting;
+using System.Collections.Generic;
 
 public class EnemyAIBase : MonoBehaviour
 {
@@ -17,18 +18,16 @@ public class EnemyAIBase : MonoBehaviour
     private bool isChasing = false;
 
     private Coroutine enemyIdleCoroutine;
-    private Coroutine LookAtTarget;
 
-    public AnimationClip idleClip;
-    public AnimationClip runClip;
-    public AnimationClip normalAttackClip;
-    public AnimationClip heavyAttackClip;
+
 
     protected Animator animator;
-    protected AnimatorOverrideController overrideController;
+    protected bool isInFight = false;
 
-    private void Start()
+
+    protected virtual void Start()
     {
+        print("base");
         agent = GetComponent<NavMeshAgent>();
 
         animator = GetComponent<Animator>();
@@ -39,32 +38,11 @@ public class EnemyAIBase : MonoBehaviour
             return;
         }
 
-        overrideController = new AnimatorOverrideController(animator.runtimeAnimatorController);
-        animator.runtimeAnimatorController = overrideController;
 
-        ReplaceAnimationClip("idle", idleClip);
-        ReplaceAnimationClip("run", runClip);
-        ReplaceAnimationClip("normal attack", normalAttackClip);
-        ReplaceAnimationClip("heavy attack", heavyAttackClip);
 
     }
 
-    private void ReplaceAnimationClip(string tag, AnimationClip newClip)
-    {
-        if (newClip == null) return;
-
-        foreach (var clipPair in overrideController.animationClips)
-        {
-            AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-
-            if (stateInfo.tagHash == Animator.StringToHash(tag))
-            {
-                overrideController[clipPair.name] = newClip;
-                Debug.Log($"Анімація для {tag} змінена на {newClip.name}");
-                break;
-            }
-        }
-    }
+    
 
 
     public void LoadEnemy(GameObject player)
@@ -74,6 +52,8 @@ public class EnemyAIBase : MonoBehaviour
 
         if (enemyIdleCoroutine == null)
             enemyIdleCoroutine = StartCoroutine(EnemyIdleBehevior());
+
+        isInFight = false;
     }
 
     public void UnloadEnemy()
@@ -88,7 +68,7 @@ public class EnemyAIBase : MonoBehaviour
         StopAllCoroutines();
         isLoaded = false;
     }
-    
+
     private IEnumerator EnemyIdleBehevior()
     {
         float delay = 1f;
@@ -101,9 +81,15 @@ public class EnemyAIBase : MonoBehaviour
             if (distance <= lookRadius)
             {
                 FightLogic(distance);
+                delay = 0.3f;
             }
             if (distance > lookRadius)
             {
+                if (isInFight)
+                {
+                    isInFight = false;
+                    ChangeIdleToDefolt();
+                }
                 isChasing = false;
                 Patrol();
                 delay = 1f;
@@ -111,6 +97,10 @@ public class EnemyAIBase : MonoBehaviour
 
             yield return new WaitForSeconds(delay);
         }
+    }
+    protected virtual void ChangeIdleToDefolt()
+    {
+
     }
     protected virtual void FightLogic(float distance)
     {
@@ -137,6 +127,7 @@ public class EnemyAIBase : MonoBehaviour
         }
         if (!agent.pathPending && agent.remainingDistance < 1.5f)
         {
+            animator.SetBool("run", false);
             if (animator.GetCurrentAnimatorStateInfo(0).tagHash != Animator.StringToHash("walk"))
                 animator.SetTrigger("start walk");
             animator.SetBool("walk", true);
@@ -145,6 +136,53 @@ public class EnemyAIBase : MonoBehaviour
             currentPatrolIndex = (currentPatrolIndex + 1) % patrolPoints.Length;
         }
     }
+
+
+    protected void changespellanim(string name, AnimationClip newAnimation)
+    {
+        if (newAnimation == null) return;
+        string stateName = name;
+
+        // Отримуємо існуючий RuntimeAnimatorController
+        var runtimeAnimatorController = animator.runtimeAnimatorController;
+
+        // Створюємо AnimatorOverrideController на основі існуючого контролера
+        var overrideController = new AnimatorOverrideController(runtimeAnimatorController);
+
+        // Замінюємо потрібний стан на нову анімацію
+        var overrides = new List<KeyValuePair<AnimationClip, AnimationClip>>(overrideController.overridesCount);
+        overrideController.GetOverrides(overrides);
+
+        int replaced = 0;
+
+
+        // Отримуємо список станів для кожного шару
+        var layerOverrides = new List<KeyValuePair<AnimationClip, AnimationClip>>(overrides);
+        overrideController.GetOverrides(layerOverrides);
+
+        for (int i = 0; i < layerOverrides.Count; i++)
+        {
+            if (layerOverrides[i].Key.name == stateName)
+            {
+                layerOverrides[i] = new KeyValuePair<AnimationClip, AnimationClip>(layerOverrides[i].Key, newAnimation);
+                replaced++;
+            }
+        }
+
+        // Замінюємо оригінальні оверрайди
+        overrideController.ApplyOverrides(layerOverrides);
+
+
+        if (replaced > 0)
+        {
+            animator.runtimeAnimatorController = overrideController;
+        }
+        else
+        {
+            Debug.LogError($"State '{stateName}' not found in the controller!");
+        }
+    }
+
 
     protected void LookAt(Transform lookAtTarget)
     {

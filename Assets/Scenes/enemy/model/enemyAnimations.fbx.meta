@@ -38,7 +38,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: enemy|atack
+      name: enemy|attack
       takeName: metarig|atack
       internalID: 4461813267280156181
       firstFrame: 0
@@ -198,8 +198,7 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
-  referencedClips:
-  - 24a77f4effd4d76469096ead10a6848f
+  referencedClips: []
   importAnimation: 1
   humanDescription:
     serializedVersion: 3
