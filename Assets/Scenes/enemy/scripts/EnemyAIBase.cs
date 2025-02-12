@@ -27,7 +27,6 @@ public class EnemyAIBase : MonoBehaviour
 
     protected virtual void Start()
     {
-        print("base");
         agent = GetComponent<NavMeshAgent>();
 
         animator = GetComponent<Animator>();
@@ -104,7 +103,6 @@ public class EnemyAIBase : MonoBehaviour
     }
     protected virtual void FightLogic(float distance)
     {
-        print("base");
         isChasing = true;
         if (agent.remainingDistance < 3)
         {

@@ -23,6 +23,8 @@ public class PlayerMovementController : MonoBehaviour
 
 
 
+
+
     private void Start()
     {
         animator = GetComponent<Animator>();
@@ -148,13 +150,20 @@ public class PlayerMovementController : MonoBehaviour
 
     }
 
-    public void WearponTrailOn()
+    public void WearponTrailOn(float AttackScale)
     {
+        weapon.GetComponent<DamageDiller>().AttackScale = AttackScale;
         weapon.GetComponentInChildren<TrailRenderer>().emitting = true;
+        //weapon.GetComponent<CapsuleCollider>().enabled = true;
+
     }
     public void WearponTrailOFF()
     {
+        //weapon.GetComponent<CapsuleCollider>().enabled = false;
         weapon.GetComponentInChildren<TrailRenderer>().emitting = false;
+        //weapon.GetComponent<DamageDiller>().attackScale = 0;
+
+
     }
 
     private IEnumerator InvokeWithDelay(System.Action method, float delay)

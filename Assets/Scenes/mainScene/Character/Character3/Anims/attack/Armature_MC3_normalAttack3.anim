@@ -23764,14 +23764,7 @@ AnimationClip:
     functionName: WearponTrailOn
     data: 
     objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 0.5
-    functionName: SetCanAttack
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
+    floatParameter: 4
     intParameter: 0
     messageOptions: 0
   - time: 0.5416667
@@ -23781,8 +23774,8 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.625
-    functionName: WeaponOff
+  - time: 0.5833333
+    functionName: SetCanAttack
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

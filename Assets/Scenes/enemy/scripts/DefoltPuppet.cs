@@ -24,7 +24,6 @@ public class DefoltPuppet : EnemyAIBase
 
         changespellanim("enemy|idle", idleClip);
         changespellanim("enemy|attack", normalAttack1);
-        print("norm");
     }
     protected override void ChangeIdleToDefolt()
     {
@@ -40,7 +39,6 @@ public class DefoltPuppet : EnemyAIBase
 
         }
         animator.SetFloat("distance", distance);
-        print(animator.GetCurrentAnimatorClipInfo(0)[0].clip.name);
         if (choosedAttack == -1)
             choosedAttack = 0;// EnemyLoader.random.Next(0, 1);
 

@@ -46,7 +46,6 @@ public class ESpell : ScriptableObject
         lastCastTime = Time.time;
         spellAction.Cast(this);
 
-        Debug.Log("Spell cast successfully!");
     }
 
     // Перевірка, чи знаходиться навик на кулдауні

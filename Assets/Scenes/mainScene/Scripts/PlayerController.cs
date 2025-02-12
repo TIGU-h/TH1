@@ -38,7 +38,6 @@ public class PlayerController : MonoBehaviour
 
         canMove = !nowAttacking;
 
-        Debug.Log(canMove);
 
         if (canMove)
             MoveAndRotation();
