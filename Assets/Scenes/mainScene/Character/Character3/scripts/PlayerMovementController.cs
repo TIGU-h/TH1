@@ -147,6 +147,7 @@ public class PlayerMovementController : MonoBehaviour
     public void WeaponOff()
     {
         weapon.SetActive(false);
+        WearponTrailOFF();
 
     }
 

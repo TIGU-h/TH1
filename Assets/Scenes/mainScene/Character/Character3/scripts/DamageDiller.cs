@@ -23,6 +23,7 @@ public class DamageDiller : MonoBehaviour
             targets = new List<GameObject>();
 
 
+
         }
     }
 
@@ -30,9 +31,9 @@ public class DamageDiller : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (((1 << other.gameObject.layer) & targetMask) != 0 && !targets.Contains(other.gameObject))
+        if ((((1 << other.gameObject.layer) & targetMask) != 0 && !targets.Contains(other.gameObject)) && GetComponentInChildren<TrailRenderer>().emitting)
         {
-            print("damage to " + other.gameObject.name + " : " + attackScale);
+            print(attackScale + " : " + Time.time);
             targets.Add(other.gameObject);
             if (hitEffectPrefab != null)
             {
