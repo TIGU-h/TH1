@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Animations;
 using UnityEngine.Playables;
@@ -16,7 +17,11 @@ public class PlayerAttackAndSpellController : MonoBehaviour
 
     private ESpell activeESpell;
     private ESpell[] eSpells;
-
+    public Stats Stats;
+    private Transform focusTarget;
+    [SerializeField] private float searchRadius; // Радіус пошуку цілі для фокусування
+    [SerializeField] private float attackRange;
+    [SerializeField] int speed;
 
     [SerializeField]
     private GameObject placeForESpell;
@@ -25,8 +30,10 @@ public class PlayerAttackAndSpellController : MonoBehaviour
     private AnimationClip curentEspellanimation;
 
     public GameObject test;
+    [SerializeField] private GameObject weapon;
 
-    //private float energy = 0;
+
+
 
     void Start()
     {
@@ -55,6 +62,10 @@ public class PlayerAttackAndSpellController : MonoBehaviour
 
         activeESpell = eSpells[0];
         changespellanim(activeESpell.newAnimationForPlayer);
+        weapon.GetComponent<DamageDiller>().ActorStats = Stats;
+
+
+
 
 
 
@@ -72,10 +83,19 @@ public class PlayerAttackAndSpellController : MonoBehaviour
         }
 
     }
+    private IEnumerator InvokeInLoopWithDelay(System.Action method, float delay)
+    {
+        while (true)
+        {
+            method?.Invoke();
+            yield return new WaitForSeconds(delay);
+        }
+    }
 
     public void Attack()
     {
-        GetComponent<PlayerMovementController>().WearponOn();
+        FocusOnTarget();
+        GetComponent<PlayerAttackAndSpellController>().WearponOn();
         animator.SetTrigger("attack");
     }
 
@@ -88,6 +108,31 @@ public class PlayerAttackAndSpellController : MonoBehaviour
     public void ResetNormal()
     {
         canAttack = false;
+    }
+
+    public void WearponOn()
+    {
+        weapon.SetActive(true);
+    }
+    public void WeaponOff()
+    {
+        weapon.SetActive(false);
+        WearponTrailOFF();
+
+    }
+
+    public void WearponTrailOn(float AttackScale)
+    {
+
+        weapon.GetComponent<DamageDiller>().AttackScale = AttackScale;
+        weapon.GetComponentInChildren<TrailRenderer>().emitting = true;
+
+    }
+    public void WearponTrailOFF()
+    {
+        weapon.GetComponentInChildren<TrailRenderer>().emitting = false;
+
+
     }
 
     public void ChangeActiveESpell(int index)
@@ -113,7 +158,7 @@ public class PlayerAttackAndSpellController : MonoBehaviour
 
         int replaced = 0;
 
-        for(int l = 0; l<animator.layerCount; l++)
+        for (int l = 0; l < animator.layerCount; l++)
         {
             // Отримуємо список станів для кожного шару
             var layerOverrides = new List<KeyValuePair<AnimationClip, AnimationClip>>(overrides);
@@ -142,4 +187,73 @@ public class PlayerAttackAndSpellController : MonoBehaviour
         }
     }
 
+    void FocusOnTarget()
+    {
+        print("focus");
+        if (focusTarget != null && Vector3.Distance(transform.position, focusTarget.position) < searchRadius / 2)
+        {
+            if (Input.GetAxisRaw("Horizontal") < 0.2 && Input.GetAxisRaw("Vertical") < 0.2)
+            {
+
+                Vector3 direction = focusTarget.position - transform.position; // Отримуємо напрямок до цілі
+                direction.y = 0; // Ігноруємо зміну висоти (Y)
+                if (direction != Vector3.zero ) // Перевіряємо, щоб напрямок не був нульовим
+                {
+                    transform.rotation = Quaternion.LookRotation(direction);
+                }
+
+            }
+            return;
+        }
+        int enemyLayer = LayerMask.GetMask("Enemy");
+        Collider[] colliders = Physics.OverlapSphere(transform.position, searchRadius, enemyLayer);
+
+        if (colliders.Length > 0)
+        {
+            Transform nearestEnemy = null;
+            float minDistance = Mathf.Infinity;
+
+            foreach (Collider collider in colliders)
+            {
+                float distance = Vector3.Distance(transform.position, collider.transform.position);
+                if (distance < minDistance)
+                {
+                    minDistance = distance;
+                    nearestEnemy = collider.transform;
+                }
+            }
+
+            if (nearestEnemy != null)
+            {
+                focusTarget = nearestEnemy;
+                if (Input.GetAxisRaw("Horizontal") < 0.2 && Input.GetAxisRaw("Vertical") < 0.2)
+                {
+
+                    Vector3 direction = focusTarget.position - transform.position; // Отримуємо напрямок до цілі
+                    direction.y = 0; // Ігноруємо зміну висоти (Y)
+                    if (direction != Vector3.zero) // Перевіряємо, щоб напрямок не був нульовим
+                    {
+                        transform.rotation = Quaternion.LookRotation(direction);
+                    }
+
+                }
+
+            }
+        }
+    }
+
+    private IEnumerator InvokeWithDelay(System.Action method, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        method?.Invoke();
+    }
+
+}
+[System.Serializable]
+public class Stats
+{
+    public int HP;
+    public int AttackPower;
+    public float energy;
 }

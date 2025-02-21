@@ -6,6 +6,7 @@ public class DamageDiller : MonoBehaviour
 {
     [SerializeField] private LayerMask targetMask;
     [SerializeField] private GameObject hitEffectPrefab;
+    public Stats ActorStats;
 
 
     private List<GameObject> targets = new List<GameObject>();
@@ -27,13 +28,13 @@ public class DamageDiller : MonoBehaviour
         }
     }
 
-
-
     private void OnTriggerEnter(Collider other)
     {
         if ((((1 << other.gameObject.layer) & targetMask) != 0 && !targets.Contains(other.gameObject)) && GetComponentInChildren<TrailRenderer>().emitting)
         {
-            print(attackScale + " : " + Time.time);
+
+            int damage = (int)(attackScale * ActorStats.AttackPower)  + 1;
+            print(damage + " : " + Time.time);
             targets.Add(other.gameObject);
             if (hitEffectPrefab != null)
             {
