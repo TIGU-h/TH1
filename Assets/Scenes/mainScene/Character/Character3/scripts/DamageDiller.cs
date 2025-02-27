@@ -6,12 +6,14 @@ public class DamageDiller : MonoBehaviour
 {
     [SerializeField] private LayerMask targetMask;
     [SerializeField] private GameObject hitEffectPrefab;
+    [SerializeField] private GameObject canvasPrefab;
+    [SerializeField] private TypeOfDamage typeOfDamage;
     public Stats ActorStats;
 
 
     private List<GameObject> targets = new List<GameObject>();
     private float attackScale;
-    public float afsadfasefasef = 0.1f;
+    public float effectScale = 0.1f;
     public float AttackScale
     {
         get => attackScale;
@@ -23,14 +25,12 @@ public class DamageDiller : MonoBehaviour
 
             targets = new List<GameObject>();
 
-
-
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
-        if ((((1 << other.gameObject.layer) & targetMask) != 0 && !targets.Contains(other.gameObject)) && GetComponentInChildren<TrailRenderer>().emitting)
+        if (/*((1 << other.gameObject.layer) & targetMask) != 0 &&*/ !targets.Contains(other.gameObject) && GetComponentInChildren<TrailRenderer>().emitting)
         {
 
             int damage = (int)(attackScale * ActorStats.AttackPower)  + 1;
@@ -38,12 +38,17 @@ public class DamageDiller : MonoBehaviour
             targets.Add(other.gameObject);
             if (hitEffectPrefab != null)
             {
-
+                
                 Vector3 hitPosition = other.ClosestPoint(transform.position);
+
                 GameObject effect = Instantiate(hitEffectPrefab, hitPosition, Quaternion.identity);
-                effect.transform.localScale *= afsadfasefasef;
+                effect.transform.localScale *= effectScale;
                 Destroy(effect, 1f);
+
+                GameObject canvas = Instantiate(canvasPrefab, hitPosition, Quaternion.identity);
+                canvas.GetComponent<DamageText>().Setup(damage, typeOfDamage);
             }
         }
     }
+    
 }
