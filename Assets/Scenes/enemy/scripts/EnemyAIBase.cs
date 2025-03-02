@@ -9,6 +9,8 @@ public class EnemyAIBase : MonoBehaviour
     [SerializeField] private Transform[] patrolPoints; // Масив точок патрулювання
     [SerializeField] protected float lookRadius = 10f;
     [SerializeField] private float rotspeed = 1f;
+    public Stats Stats;
+
 
     public bool isLoaded = false;
 
@@ -36,12 +38,14 @@ public class EnemyAIBase : MonoBehaviour
             Debug.LogError("На об'єкті немає Animator!");
             return;
         }
+        GetComponent<Health>().SetStats(Stats);
+
 
 
 
     }
 
-    
+
 
 
     public void LoadEnemy(GameObject player)

@@ -34,6 +34,11 @@ public class DamageDiller : MonoBehaviour
         {
 
             int damage = (int)(attackScale * ActorStats.AttackPower)  + 1;
+            var hp = other.GetComponent<Health>();
+            if (hp != null)
+            {
+                hp.TakeDamage(damage);
+            }
             print(damage + " : " + Time.time);
             targets.Add(other.gameObject);
             if (hitEffectPrefab != null)

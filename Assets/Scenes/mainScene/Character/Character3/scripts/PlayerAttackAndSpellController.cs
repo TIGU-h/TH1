@@ -63,6 +63,7 @@ public class PlayerAttackAndSpellController : MonoBehaviour
         activeESpell = eSpells[0];
         changespellanim(activeESpell.newAnimationForPlayer);
         weapon.GetComponent<DamageDiller>().ActorStats = Stats;
+        GetComponent<Health>().SetStats(Stats);
 
 
 
@@ -253,6 +254,7 @@ public class PlayerAttackAndSpellController : MonoBehaviour
 [System.Serializable]
 public class Stats
 {
+    public int MaxHP;
     public int HP;
     public int AttackPower;
     public float energy;
