@@ -9,7 +9,9 @@ public class EnemyAIBase : MonoBehaviour
     [SerializeField] private Transform[] patrolPoints; // Масив точок патрулювання
     [SerializeField] protected float lookRadius = 10f;
     [SerializeField] private float rotspeed = 1f;
+    [SerializeField] private float timeForDie = 2f;
     public Stats Stats;
+
 
 
     public bool isLoaded = false;
@@ -25,6 +27,8 @@ public class EnemyAIBase : MonoBehaviour
 
     protected Animator animator;
     protected bool isInFight = false;
+    private bool isDead = false;
+    
 
 
     protected virtual void Start()
@@ -39,12 +43,43 @@ public class EnemyAIBase : MonoBehaviour
             return;
         }
         GetComponent<Health>().SetStats(Stats);
-
+        GetComponent<Health>().OnDeath += Die;
 
 
 
     }
+    protected virtual void Die()
+    {
+        isDead = true;
+        StopAllCoroutines();
+        ResetAllAnimatorParameters(animator);
+        animator.SetTrigger("die");
+        Destroy(gameObject, timeForDie);
+    }
 
+    private void ResetAllAnimatorParameters(Animator animator)
+    {
+        if (animator == null) return;
+
+        foreach (AnimatorControllerParameter param in animator.parameters)
+        {
+            switch (param.type)
+            {
+                case AnimatorControllerParameterType.Bool:
+                    animator.SetBool(param.name, false);
+                    break;
+
+                case AnimatorControllerParameterType.Trigger:
+                    animator.ResetTrigger(param.name);
+                    break;
+            }
+        }
+    }
+
+    private void OnDestroy()
+    {
+        GetComponent<Health>().OnDeath -= Die;
+    }
 
 
 
@@ -79,7 +114,11 @@ public class EnemyAIBase : MonoBehaviour
         while (true)
         {
 
-
+            if (isDead)
+            {
+                ResetAllAnimatorParameters(animator);
+                yield break;
+            }
             float distance = Vector3.Distance(target.position, transform.position);
             if (distance <= lookRadius)
             {

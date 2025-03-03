@@ -32,28 +32,40 @@ public class DamageDiller : MonoBehaviour
     {
         if (/*((1 << other.gameObject.layer) & targetMask) != 0 &&*/ !targets.Contains(other.gameObject) && GetComponentInChildren<TrailRenderer>().emitting)
         {
-
-            int damage = (int)(attackScale * ActorStats.AttackPower)  + 1;
+            Vector3 hitPosition = other.ClosestPoint(transform.position);
             var hp = other.GetComponent<Health>();
             if (hp != null)
             {
+                if (hp.statsRef.HP <= 0)
+                {
+                    return;
+                }
+                int damage = (int)(attackScale * ActorStats.AttackPower) + 1;
+
                 hp.TakeDamage(damage);
+                if (canvasPrefab != null)
+                {
+
+
+                    GameObject canvas = Instantiate(canvasPrefab, hitPosition, Quaternion.identity);
+                    canvas.GetComponent<DamageText>().Setup(damage, typeOfDamage);
+                }
+
+
+
+
             }
-            print(damage + " : " + Time.time);
+
             targets.Add(other.gameObject);
             if (hitEffectPrefab != null)
             {
-                
-                Vector3 hitPosition = other.ClosestPoint(transform.position);
-
                 GameObject effect = Instantiate(hitEffectPrefab, hitPosition, Quaternion.identity);
                 effect.transform.localScale *= effectScale;
                 Destroy(effect, 1f);
 
-                GameObject canvas = Instantiate(canvasPrefab, hitPosition, Quaternion.identity);
-                canvas.GetComponent<DamageText>().Setup(damage, typeOfDamage);
+
             }
         }
     }
-    
+
 }

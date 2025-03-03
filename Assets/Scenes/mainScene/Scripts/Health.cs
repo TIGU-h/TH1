@@ -9,7 +9,7 @@ public class Health : MonoBehaviour
     [SerializeField] private Slider healthSlider;
     [SerializeField] private bool rotate;
 
-    private Stats statsRef; // Посилання на Stats
+    public Stats statsRef { get; private set; } // Посилання на Stats
 
 
     public event Action OnDeath;
