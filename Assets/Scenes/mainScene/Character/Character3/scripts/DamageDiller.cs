@@ -30,6 +30,7 @@ public class DamageDiller : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
+        print(gameObject + ":::" + other.gameObject);
         if (/*((1 << other.gameObject.layer) & targetMask) != 0 &&*/ !targets.Contains(other.gameObject) && GetComponentInChildren<TrailRenderer>().emitting)
         {
             Vector3 hitPosition = other.ClosestPoint(transform.position);
@@ -50,10 +51,6 @@ public class DamageDiller : MonoBehaviour
                     GameObject canvas = Instantiate(canvasPrefab, hitPosition, Quaternion.identity);
                     canvas.GetComponent<DamageText>().Setup(damage, typeOfDamage);
                 }
-
-
-
-
             }
 
             targets.Add(other.gameObject);

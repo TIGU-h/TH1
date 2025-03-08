@@ -8,6 +8,7 @@ public class DefoltPuppet : EnemyAIBase
     [SerializeField] private AnimationClip normalAttack1;
     [SerializeField] private AnimationClip normalAttack2;
     [SerializeField] private AnimationClip fightingIdle;
+    [SerializeField] private GameObject weapon;
 
     private bool isAttacking = false;
     private int choosedAttack = -1;
@@ -17,19 +18,20 @@ public class DefoltPuppet : EnemyAIBase
     {
         base.Start();
 
-        changespellanim("enemy|idle", idleClip);
+        changespellanim("enemy_idle", idleClip);
         changespellanim("enemy|attack", normalAttack1);
+        weapon.GetComponent<DamageDiller>().ActorStats = Stats;
     }
     protected override void ChangeIdleToDefolt()
     {
-        changespellanim("enemy|idle", idleClip);
+        changespellanim("enemy_idle", idleClip);
     }
 
     protected override void FightLogic(float distance)
     {
         if (isInFight == false)
         {
-            changespellanim("enemy|idle", fightingIdle);
+            changespellanim("enemy_idle", fightingIdle);
             isInFight = true;
 
         }
@@ -100,6 +102,18 @@ public class DefoltPuppet : EnemyAIBase
                 choosedAttack = -1;
                 break;
         }
+    }
+
+
+
+    public void WearponTrailOn(float AttackScale)
+    {
+        weapon.GetComponent<DamageDiller>().AttackScale = AttackScale;
+        weapon.GetComponentInChildren<TrailRenderer>().emitting = true;
+    }
+    public void WearponTrailOFF()
+    {
+        weapon.GetComponentInChildren<TrailRenderer>().emitting = false;
     }
 
     private IEnumerator InvokeWithDelay(System.Action method, float delay)

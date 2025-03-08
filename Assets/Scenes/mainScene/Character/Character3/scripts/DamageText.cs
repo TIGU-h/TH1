@@ -12,7 +12,6 @@ public class DamageText : MonoBehaviour
 
     public void Setup(int damage, TypeOfDamage typeOfDamage)
     {
-        print(damage);
         textMesh.text = damage.ToString();
         transform.LookAt(Camera.main.transform);
 

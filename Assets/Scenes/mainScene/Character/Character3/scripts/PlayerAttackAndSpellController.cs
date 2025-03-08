@@ -186,7 +186,6 @@ public class PlayerAttackAndSpellController : MonoBehaviour
 
     void FocusOnTarget()
     {
-        print("focus");
         if (focusTarget != null && Vector3.Distance(transform.position, focusTarget.position) < searchRadius / 2)
         {
             if (Input.GetAxisRaw("Horizontal") < 0.2 && Input.GetAxisRaw("Vertical") < 0.2)
