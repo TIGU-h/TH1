@@ -50,8 +50,8 @@ Material:
     - _UseFog: 1
     - _ViewDistance: 6000
     - __dirty: 0
-    - _cloudsHeight: 150
-    - _cloudsPosition: 1000
+    - _cloudsHeight: 294.4
+    - _cloudsPosition: 215.64
     m_Colors:
     - _CloudsColor: {r: 0.30588236, g: 0.42352945, b: 0.5176471, a: 1}
     - _DirectionSpeed: {r: 10, g: 5, b: 50, a: -5}
