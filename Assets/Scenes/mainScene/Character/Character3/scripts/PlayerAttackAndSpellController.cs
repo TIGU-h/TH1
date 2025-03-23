@@ -26,7 +26,8 @@ public class PlayerAttackAndSpellController : MonoBehaviour
     private AnimationClip curentEspellanimation;
 
     public GameObject test;
-    [SerializeField] private GameObject weapon;
+
+    public GameObject weapon;
 
 
 
@@ -236,6 +237,10 @@ public class PlayerAttackAndSpellController : MonoBehaviour
 
             }
         }
+    }
+    public void Create(GameObject gameObject)
+    {
+        Instantiate(gameObject);
     }
 
     private IEnumerator InvokeWithDelay(System.Action method, float delay)

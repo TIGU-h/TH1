@@ -12,6 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0db83461d36d16a4bb02efb9024a55cd, type: 3}
   m_Name: speed
   m_EditorClassIdentifier: 
+  id: 1
+  name: speed
+  description: 
+  icon: {fileID: 0}
+  element: 3
   cooldown: 15
   prefabs: []
   newAnimationForPlayer: {fileID: 7400000, guid: dbb30a55baadeb34685aebccea8ba4a3, type: 2}

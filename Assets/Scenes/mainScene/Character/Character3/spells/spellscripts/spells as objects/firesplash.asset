@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0db83461d36d16a4bb02efb9024a55cd, type: 3}
+  m_Name: firesplash
+  m_EditorClassIdentifier: 
+  id: 3
+  name: firesplash
+  description: 
+  icon: {fileID: 0}
+  element: 2
+  cooldown: 2
+  prefabs:
+  - {fileID: 3768822205736152801, guid: e77b87cc81151304596fbcd37ebf3e68, type: 3}
+  newAnimationForPlayer: {fileID: 7400000, guid: abbc66ffccad51d4f9631b586cfc9e9d, type: 2}
+  spellAction: {fileID: -3334163114025985291, guid: b8883db8334f7474ea348664e1c18de6, type: 3}
+  playerWhoCasting: {fileID: 0}

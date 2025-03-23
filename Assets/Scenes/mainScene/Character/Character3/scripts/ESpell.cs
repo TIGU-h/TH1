@@ -5,6 +5,12 @@ using UnityEngine;
 
 public class ESpell : ScriptableObject
 {
+    [SerializeField] int id;
+    [SerializeField] string name;
+    [SerializeField] string description;
+    [SerializeField] Sprite icon;
+    [SerializeField] Element element;
+
     [SerializeField]
     private float cooldown;
 
@@ -24,6 +30,7 @@ public class ESpell : ScriptableObject
 
     public void CopyFrom(ESpell eSpell)
     {
+
         cooldown = eSpell.cooldown;
         prefabs = eSpell.prefabs ?? Array.Empty<GameObject>();
         newAnimationForPlayer = eSpell.newAnimationForPlayer;
@@ -44,7 +51,7 @@ public class ESpell : ScriptableObject
         spellAction.gameObject.SetActive(true);
 
         lastCastTime = Time.time;
-        spellAction.Cast(this);
+        spellAction?.Cast(this);
 
     }
 
@@ -65,5 +72,13 @@ public class ESpell : ScriptableObject
     {
         lastCastTime = -cooldown;
     }
+}
+
+public enum Element
+{
+    Wather,
+    Earth,
+    Fire,
+    Air
 }
 
