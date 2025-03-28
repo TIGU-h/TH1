@@ -8,6 +8,8 @@ public class DamageDiller : MonoBehaviour
     [SerializeField] private GameObject hitEffectPrefab;
     [SerializeField] private GameObject canvasPrefab;
     [SerializeField] private TypeOfDamage typeOfDamage;
+    [SerializeField] public bool haveToDelete = false;
+
     public Stats ActorStats;
 
 
@@ -27,13 +29,31 @@ public class DamageDiller : MonoBehaviour
 
         }
     }
+    private bool wasEffect = false;
+
 
     private void OnTriggerStay(Collider other)
     {
         print(gameObject + ":::" + other.gameObject);
-        if (/*((1 << other.gameObject.layer) & targetMask) != 0 &&*/ !targets.Contains(other.gameObject) && GetComponentInChildren<TrailRenderer>().emitting)
+
+        if (haveToDelete)
+        {
+
+            Vector3 hitPosition = other.ClosestPoint(transform.position);
+            if (hitEffectPrefab != null)
+            {
+                GameObject effect = Instantiate(hitEffectPrefab, hitPosition, Quaternion.identity);
+                effect.transform.localScale *= effectScale;
+                Destroy(effect, 1f);
+                wasEffect = true;
+
+            }
+        }
+
+        if (((1 << other.gameObject.layer) & targetMask) != 0 && !targets.Contains(other.gameObject) && GetComponentInChildren<TrailRenderer>().emitting)
         {
             Vector3 hitPosition = other.ClosestPoint(transform.position);
+
             var hp = other.GetComponent<Health>();
             if (hp != null)
             {
@@ -54,14 +74,21 @@ public class DamageDiller : MonoBehaviour
             }
 
             targets.Add(other.gameObject);
-            if (hitEffectPrefab != null)
+            if (hitEffectPrefab != null && !wasEffect)
             {
+
                 GameObject effect = Instantiate(hitEffectPrefab, hitPosition, Quaternion.identity);
                 effect.transform.localScale *= effectScale;
                 Destroy(effect, 1f);
 
 
             }
+        }
+        if (haveToDelete)
+        {
+
+
+            gameObject.SetActive(false);
         }
     }
 
