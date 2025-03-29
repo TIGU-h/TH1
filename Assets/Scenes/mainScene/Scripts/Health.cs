@@ -2,12 +2,14 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using TMPro;
 
 
 public class Health : MonoBehaviour
 {
     [SerializeField] private Slider healthSlider;
     [SerializeField] private bool rotate;
+    [SerializeField] private Text text;
 
     public Stats statsRef { get; private set; } // Посилання на Stats
 
@@ -29,6 +31,10 @@ public class Health : MonoBehaviour
             if (rotate)
                 StartCoroutine(FaceCamera());
 
+            if (text != null)
+            {
+                text.text = statsRef.HP + "/" + statsRef.MaxHP;
+            }
         }
     }
     public void SetStats(Stats stats)
@@ -77,11 +83,19 @@ public class Health : MonoBehaviour
     public void TakeDamage(int damage)
     {
         SetCurrentHP(statsRef.HP - damage);
+        if (text != null)
+        {
+            text.text = statsRef.HP + "/" + statsRef.MaxHP;
+        }
     }
 
     public void Heal(int healAmount)
     {
         SetCurrentHP(statsRef.HP + healAmount);
+        if (text != null)
+        {
+            text.text = statsRef.HP + "/" + statsRef.MaxHP;
+        }
     }
 
     private void Die()

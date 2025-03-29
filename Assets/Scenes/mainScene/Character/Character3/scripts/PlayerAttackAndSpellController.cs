@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerAttackAndSpellController : MonoBehaviour
 {
@@ -28,6 +30,9 @@ public class PlayerAttackAndSpellController : MonoBehaviour
     public GameObject test;
 
     public GameObject weapon;
+    [SerializeField] private Image CDimage;
+    [SerializeField] private Text CDtext;
+
 
 
 
@@ -62,11 +67,41 @@ public class PlayerAttackAndSpellController : MonoBehaviour
         weapon.GetComponent<DamageDiller>().ActorStats = Stats;
         GetComponent<Health>().SetStats(Stats);
 
+        if (CDimage != null && CDtext != null)
+        {
+            print("new icon" + activeESpell.icon.name);
+            CDimage.sprite = activeESpell.icon;
+
+            if (activeESpell.IsOnCooldown())
+            {
+                CDtext.gameObject.SetActive(true);
+                CDtext.text = ((activeESpell.GetCoolDown() - activeESpell.GetTimeForCoolDown())).ToString("F1");
+                CDimage.fillAmount = activeESpell.GetTimeForCoolDown() / activeESpell.GetCoolDown();
+                CDimage.GetComponent<Button>().interactable = false;
+            }
+            else
+            {
+
+                CDtext.gameObject.SetActive(false);
+                CDimage.fillAmount = 100;
+                CDimage.GetComponent<Button>().interactable = true;
+
+
+            }
+
+        }
 
 
 
 
 
+
+    }
+    public void UseSpell()
+    {
+        activeESpell.spellAction.gameObject.SetActive(true);
+
+        activeESpell.Cast();
     }
 
     void Update()
@@ -74,11 +109,30 @@ public class PlayerAttackAndSpellController : MonoBehaviour
         if (Input.GetButtonDown("Fire1") && canAttack)
             Attack();
         if (Input.GetButtonDown("eSpell"))
-        {
-            activeESpell.spellAction.gameObject.SetActive(true);
+            UseSpell();
 
-            activeESpell.Cast();
+        if (CDimage != null && CDtext != null)
+        {
+
+            if (activeESpell.IsOnCooldown())
+            {
+                CDtext.gameObject.SetActive(true);
+                CDtext.text = ((activeESpell.GetCoolDown() - activeESpell.GetTimeForCoolDown())).ToString("F1");
+                CDimage.fillAmount = activeESpell.GetTimeForCoolDown() / activeESpell.GetCoolDown();
+                CDimage.GetComponent<Button>().interactable = false;
+            }
+            else
+            {
+
+                CDtext.gameObject.SetActive(false);
+                CDimage.fillAmount = 100;
+                CDimage.GetComponent<Button>().interactable = true;
+
+
+            }
+
         }
+
 
     }
     private IEnumerator InvokeInLoopWithDelay(System.Action method, float delay)
@@ -138,6 +192,31 @@ public class PlayerAttackAndSpellController : MonoBehaviour
         index %= 4;
         activeESpell = eSpells[index];
         changespellanim(activeESpell.newAnimationForPlayer);
+
+        if (CDimage != null && CDtext != null)
+        {
+            CDimage.sprite = activeESpell.icon;
+
+            if (activeESpell.IsOnCooldown())
+            {
+                CDtext.gameObject.SetActive(true);
+                CDtext.text = ((activeESpell.GetCoolDown() - activeESpell.GetTimeForCoolDown())).ToString("F1");
+                CDimage.fillAmount = activeESpell.GetTimeForCoolDown() / activeESpell.GetCoolDown();
+                CDimage.GetComponent<Button>().interactable = false;
+            }
+            else
+            {
+
+                CDtext.gameObject.SetActive(false);
+                CDimage.fillAmount = 100;
+                CDimage.GetComponent<Button>().interactable = true;
+
+
+            }
+
+        }
+
+
     }
 
     private void changespellanim(AnimationClip newAnimation)
@@ -194,7 +273,7 @@ public class PlayerAttackAndSpellController : MonoBehaviour
 
                 Vector3 direction = focusTarget.position - transform.position; // Отримуємо напрямок до цілі
                 direction.y = 0; // Ігноруємо зміну висоти (Y)
-                if (direction != Vector3.zero ) // Перевіряємо, щоб напрямок не був нульовим
+                if (direction != Vector3.zero) // Перевіряємо, щоб напрямок не був нульовим
                 {
                     transform.rotation = Quaternion.LookRotation(direction);
                 }

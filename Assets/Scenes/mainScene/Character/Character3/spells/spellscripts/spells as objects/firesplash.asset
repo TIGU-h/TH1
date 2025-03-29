@@ -15,9 +15,9 @@ MonoBehaviour:
   id: 3
   name: firesplash
   description: 
-  icon: {fileID: 0}
   element: 2
-  cooldown: 2
+  icon: {fileID: 423940934, guid: 5f7a72b3df1eddb4282011dc70709a7f, type: 3}
+  cooldown: 15
   prefabs:
   - {fileID: 3768822205736152801, guid: e77b87cc81151304596fbcd37ebf3e68, type: 3}
   newAnimationForPlayer: {fileID: 7400000, guid: abbc66ffccad51d4f9631b586cfc9e9d, type: 2}

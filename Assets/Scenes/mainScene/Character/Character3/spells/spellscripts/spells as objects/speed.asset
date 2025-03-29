@@ -15,8 +15,8 @@ MonoBehaviour:
   id: 1
   name: speed
   description: 
-  icon: {fileID: 0}
   element: 3
+  icon: {fileID: 349637213, guid: 5f7a72b3df1eddb4282011dc70709a7f, type: 3}
   cooldown: 15
   prefabs: []
   newAnimationForPlayer: {fileID: 7400000, guid: dbb30a55baadeb34685aebccea8ba4a3, type: 2}

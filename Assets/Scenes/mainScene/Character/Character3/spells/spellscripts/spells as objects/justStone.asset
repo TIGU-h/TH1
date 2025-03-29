@@ -15,9 +15,9 @@ MonoBehaviour:
   id: 4
   name: just stone
   description: 
-  icon: {fileID: 0}
   element: 1
-  cooldown: 2
+  icon: {fileID: 781725700, guid: 5f7a72b3df1eddb4282011dc70709a7f, type: 3}
+  cooldown: 4
   prefabs:
   - {fileID: 6865329669221106870, guid: 26dddc12dd3c5bc4fa9671b97a7e6cb8, type: 3}
   newAnimationForPlayer: {fileID: 7400000, guid: dca316d46bad6b94c937eafecbad2314, type: 2}

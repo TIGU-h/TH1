@@ -8,8 +8,8 @@ public class ESpell : ScriptableObject
     [SerializeField] int id;
     [SerializeField] string name;
     [SerializeField] string description;
-    [SerializeField] Sprite icon;
     [SerializeField] Element element;
+    public Sprite icon;
 
     [SerializeField]
     private float cooldown;
@@ -31,9 +31,16 @@ public class ESpell : ScriptableObject
     public void CopyFrom(ESpell eSpell)
     {
 
+        id = eSpell.id;
+        name = eSpell.name;
+        description = eSpell.description;
+        element = eSpell.element;
+        icon = eSpell.icon;
+
         cooldown = eSpell.cooldown;
         prefabs = eSpell.prefabs ?? Array.Empty<GameObject>();
         newAnimationForPlayer = eSpell.newAnimationForPlayer;
+
 
         lastCastTime = -cooldown;
     }
@@ -71,6 +78,14 @@ public class ESpell : ScriptableObject
     public void ResetCoolDown()
     {
         lastCastTime = -cooldown;
+    }
+    public float GetTimeForCoolDown()
+    {
+        return Time.time - lastCastTime ;
+    }
+    public float GetCoolDown()
+    {
+        return cooldown;
     }
 }
 

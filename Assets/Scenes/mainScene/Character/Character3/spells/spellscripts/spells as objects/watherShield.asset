@@ -15,9 +15,9 @@ MonoBehaviour:
   id: 2
   name: wather shield
   description: 
-  icon: {fileID: 0}
   element: 0
-  cooldown: 20
+  icon: {fileID: -742673347, guid: 5f7a72b3df1eddb4282011dc70709a7f, type: 3}
+  cooldown: 12
   prefabs: []
   newAnimationForPlayer: {fileID: 7400000, guid: 27aadbdd72785e44e9c3f09480c85064, type: 2}
   spellAction: {fileID: 2659912159211444857, guid: 071de082b6769194889e3769bca83f3a, type: 3}
