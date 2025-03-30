@@ -11,7 +11,7 @@ public class FireBlade : SpellActionBase
         StartCoroutine(InvokeWithDelay(() =>
         {
             GameObject splash =  Instantiate(eSpell.GetPrefabs()[0], transform.position, transform.rotation);
-            splash.GetComponent<DamageDiller>().ActorStats = GetComponentInParent<PlayerAttackAndSpellController>().Stats;
+            splash.GetComponent<DamageDiller>().ActorStats = eSpell.playerWhoCasting.GetComponent<CharacterStats>().Stats;
             splash.GetComponent<DamageDiller>().AttackScale = 8f;
         }, 0.5f));
 

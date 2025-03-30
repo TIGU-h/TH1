@@ -6,7 +6,7 @@ using UnityEngine;
 public class ESpell : ScriptableObject
 {
     [SerializeField] int id;
-    [SerializeField] string name;
+    //[SerializeField] string name;
     [SerializeField] string description;
     [SerializeField] Element element;
     public Sprite icon;

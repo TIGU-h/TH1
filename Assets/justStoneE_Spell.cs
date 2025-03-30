@@ -13,7 +13,7 @@ public class justStoneE_Spell : SpellActionBase
         StartCoroutine(InvokeWithDelay(() =>
         {
             GameObject stone = Instantiate(eSpell.GetPrefabs()[0], transform.position, transform.rotation);
-            stone.GetComponent<DamageDiller>().ActorStats = GetComponentInParent<PlayerAttackAndSpellController>().Stats;
+            stone.GetComponent<DamageDiller>().ActorStats = eSpell.playerWhoCasting.GetComponent<CharacterStats>().Stats;
             stone.GetComponent<DamageDiller>().AttackScale = AttackScale;
         }, timeforcreate));
     }

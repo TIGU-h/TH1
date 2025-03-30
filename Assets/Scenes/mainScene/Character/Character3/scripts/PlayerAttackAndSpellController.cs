@@ -15,7 +15,6 @@ public class PlayerAttackAndSpellController : MonoBehaviour
 
     private ESpell activeESpell;
     private ESpell[] eSpells;
-    public Stats Stats;
     private Transform focusTarget;
     [SerializeField] private float searchRadius; // Радіус пошуку цілі для фокусування
     [SerializeField] private float attackRange;
@@ -64,12 +63,11 @@ public class PlayerAttackAndSpellController : MonoBehaviour
 
         activeESpell = eSpells[0];
         changespellanim(activeESpell.newAnimationForPlayer);
-        weapon.GetComponent<DamageDiller>().ActorStats = Stats;
-        GetComponent<Health>().SetStats(Stats);
+        weapon.GetComponent<DamageDiller>().ActorStats = GetComponent<CharacterStats>().Stats;
+        GetComponent<Health>().SetStats(GetComponent<CharacterStats>().Stats);
 
         if (CDimage != null && CDtext != null)
         {
-            print("new icon" + activeESpell.icon.name);
             CDimage.sprite = activeESpell.icon;
 
             if (activeESpell.IsOnCooldown())
@@ -329,12 +327,4 @@ public class PlayerAttackAndSpellController : MonoBehaviour
         method?.Invoke();
     }
 
-}
-[System.Serializable]
-public class Stats
-{
-    public int MaxHP;
-    public int HP;
-    public int AttackPower;
-    public float energy;
 }

@@ -4,7 +4,6 @@ using UnityEngine.TextCore.Text;
 
 public class DamageText : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed = 2f;  
     [SerializeField] private float lifetime = 1f;   
 
     [SerializeField]private TextMeshProUGUI textMesh;
