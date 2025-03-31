@@ -10,6 +10,7 @@ public class Health : MonoBehaviour
     [SerializeField] private Slider healthSlider;
     [SerializeField] private bool rotate;
     [SerializeField] private Text text;
+    [SerializeField] private TextMeshProUGUI level;
 
     public Stats statsRef { get; private set; } // Посилання на Stats
 
@@ -34,6 +35,10 @@ public class Health : MonoBehaviour
             if (text != null)
             {
                 text.text = statsRef.HP + "/" + statsRef.MaxHP;
+            }
+            if (level != null)
+            {
+                level.text = "Lv. " + statsRef.level;
             }
         }
     }

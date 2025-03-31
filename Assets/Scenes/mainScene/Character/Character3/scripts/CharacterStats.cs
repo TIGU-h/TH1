@@ -7,7 +7,7 @@ public class CharacterStats : MonoBehaviour
     public Stats BaseStats;
     public Stats Stats;
 
-    private List<Gem> equippedGems = new List<Gem>();
+    private Gem[] equippedGems = new Gem[4];
     private Weapon equippedWeapon;
 
     private void Awake()
@@ -20,11 +20,16 @@ public class CharacterStats : MonoBehaviour
     {
         if (gem != null)
         {
-            equippedGems.Add(gem);
+            //if (equippedGems[(int)gem.element] != null)
+            equippedGems[(int)gem.element] = gem;
+
             UpdateStats();
         }
     }
-
+    public Gem GetEquippedGem(int element)
+    {
+        return equippedGems[(int)element];
+    }
     public void EquipWeapon(Weapon weapon)
     {
         equippedWeapon = weapon;
@@ -42,8 +47,13 @@ public class CharacterStats : MonoBehaviour
         // Додаємо бонуси від каменів
         foreach (var gem in equippedGems)
         {
-            Stats.MaxHP += gem.statBonus.MaxHP;
-            Stats.AttackPower += gem.statBonus.AttackPower;
+            if (gem != null)
+            {
+                Stats.MaxHP += gem.statBonus.MaxHP;
+                Stats.AttackPower += gem.statBonus.AttackPower;
+
+            }
+
         }
 
         // Додаємо бонуси від зброї
@@ -58,6 +68,7 @@ public class CharacterStats : MonoBehaviour
 public class Stats
 {
     public int level;
+    public float scaleWithLevel;
     public int MaxHP;
     public int HP;
     public int AttackPower;
@@ -71,4 +82,14 @@ public class Stats
         AttackPower = Random.Range(2 * itemLevel, 5 * itemLevel);
         energy = Random.Range(1f * itemLevel, 3f * itemLevel);
     }
+
+    public void ScaleStatsByLevel()
+    {
+        float scale = level * scaleWithLevel;
+        MaxHP = MaxHP + (int)(MaxHP * scale);
+        HP = MaxHP;
+        AttackPower = AttackPower + (int)(AttackPower * scale);
+        energy = energy + energy * scale;
+    }
+
 }

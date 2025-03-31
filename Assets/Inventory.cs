@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.ShaderKeywordFilter;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,9 +13,11 @@ public class Inventory : MonoBehaviour
     [SerializeField] Button[] ShowGemsB; // Кнопки для відображення гемів певного елемента
     [SerializeField] GameObject[] ShowGemP; // Панелі для відображення гемів
     [SerializeField] GameObject GemWinPrefab; // Префаб для гемів у UI
+    [SerializeField] ChooseGemUI[] CurentGems;
 
     [SerializeField] Button ShowWeaponsB;
     [SerializeField] GameObject ShowWeaponP;
+    CharacterStats ch;
 
 
     private void Start()
@@ -29,7 +30,14 @@ public class Inventory : MonoBehaviour
         for (int i = 0; i < ShowGemsB.Length; i++)
         {
             int index = i; // Локальна змінна для збереження індексу
-            ShowGemsB[i].onClick.AddListener(() => ShowGemsByElement((Element)index));
+            ch = GetComponent<CharacterStats>();
+            ShowGemsB[i].onClick.AddListener(() =>
+            {
+                if (ch.GetEquippedGem(index) != null)
+                    CurentGems[index].init(ch.GetEquippedGem(index));
+                ShowGemsByElement((Element)index);
+
+            });
         }
 
     }
@@ -39,6 +47,13 @@ public class Inventory : MonoBehaviour
         {
             OpenInventory();
         }
+        if (inventoryUI.activeSelf)
+        {
+            inventoryUI.GetComponentInParent<UIController>().activeMouse = true;
+            inventoryUI.GetComponentInParent<UIController>().draggingMouse = true;
+
+        }
+
     }
 
     public void OpenInventory()
@@ -46,7 +61,12 @@ public class Inventory : MonoBehaviour
         if (inventoryUI != null)
         {
             bool isActive = !inventoryUI.activeSelf;
+
+            inventoryUI.GetComponentInParent<UIController>().activeMouse = isActive;
+            inventoryUI.GetComponentInParent<UIController>().draggingMouse = isActive;
+
             inventoryUI.SetActive(isActive);
+
 
             if (isActive && ShowGemsB.Length > 0)
             {
@@ -101,6 +121,14 @@ public class Inventory : MonoBehaviour
             {
                 GameObject gemUI = Instantiate(GemWinPrefab, ShowGemP[index].transform);
                 gemUI.GetComponent<ChooseGemUI>().init(gem); // Передаємо гем у UI-об'єкт
+                gemUI.GetComponent<ChooseGemUI>().chooseButton.onClick.AddListener(() =>
+                {
+                    GetComponent<CharacterStats>().EquipGem(gem);
+                    CurentGems[(int)element].init(GetComponent<CharacterStats>().GetEquippedGem((int)element));
+                });
+
+
+
             }
         }
     }

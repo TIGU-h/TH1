@@ -33,6 +33,7 @@ public class EnemyAIBase : MonoBehaviour
 
     protected virtual void Start()
     {
+        Stats.ScaleStatsByLevel();
         agent = GetComponent<NavMeshAgent>();
 
         animator = GetComponent<Animator>();
@@ -48,6 +49,7 @@ public class EnemyAIBase : MonoBehaviour
 
 
     }
+    
     protected virtual void Die()
     {
         isDead = true;

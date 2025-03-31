@@ -18,14 +18,15 @@ public class ChooseGemUI : MonoBehaviour
     private Gem gem;
     [SerializeField] Color[] buttonColor;
     [SerializeField] Color[] BGColor;
-    [SerializeField] Button chooseButton;
     [SerializeField] Image bGImage;
     [SerializeField] Image gemImage;
     [SerializeField] TextMeshProUGUI gemMainBuf;
     [SerializeField] TextMeshProUGUI gemStatsBuf;
 
+    public Button chooseButton;
     public void init(Gem gem)
     {
+        if (gem == null) return;
         this.gem = gem;
         gemMainBuf.text = gem.mainbuf + "%" + elementsNames[(int)gem.element];
         gemStatsBuf.text = string.Empty;
@@ -34,9 +35,10 @@ public class ChooseGemUI : MonoBehaviour
         if (gem.statBonus.MaxHP > 0) gemStatsBuf.text += $"Max HP: {gem.statBonus.MaxHP}\n";
         if (gem.statBonus.AttackPower > 0) gemStatsBuf.text += $"Attack Power: {gem.statBonus.AttackPower}\n";
 
-        chooseButton.GetComponent<Image>().color = buttonColor[(int)gem.element];
-        bGImage.color = BGColor[(int)gem.element];
-        gemImage.sprite = gem.icon;
+        if (chooseButton != null) chooseButton.GetComponent<Image>().color = buttonColor[(int)gem.element];
+        if (bGImage != null) bGImage.color = BGColor[(int)gem.element];
+        if (gemImage != null) gemImage.sprite = gem.icon;
 
     }
 }
+

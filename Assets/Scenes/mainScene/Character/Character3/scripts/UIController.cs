@@ -5,36 +5,41 @@ using UnityEngine;
 public class UIController : MonoBehaviour
 {
     [SerializeField] private GameObject tabBar;
+    public bool activeMouse = false;
+    public bool draggingMouse = false;
     void Update()
     {
 
-        // Коли кнопка натискається
         if (Input.GetButton("changeSkillType"))
         {
             tabBar.SetActive(true);
-            Cursor.lockState = CursorLockMode.None;
+            draggingMouse = true;
+            activeMouse = false;
+            
         }
-        else if (Input.GetButton("Enable cursor"))
+        else if (Input.GetButtonDown("Enable cursor"))
         {
-            //canRotate = false;
-            //if(Cursor.lockState!=CursorLockMode.None)
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
+
+            draggingMouse = true;
+            activeMouse = true;
         }
-        else
+        else if(Input.GetButtonUp("Enable cursor"))
         {
-            //canRotate = true;
 
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
+            draggingMouse = false;
+            activeMouse = false;
         }
 
-        // Коли кнопка відпускається
         if (Input.GetButtonUp("changeSkillType"))
         {
             tabBar.SetActive(false);
-            Cursor.lockState = CursorLockMode.Locked;
+            draggingMouse = false;
+            activeMouse = false;
         }
+
+        Cursor.visible = activeMouse;
+        Cursor.lockState = draggingMouse?CursorLockMode.Confined : CursorLockMode.Locked;
+
 
 
 
