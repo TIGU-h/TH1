@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class Chest : MonoBehaviour
+public class Chest : FEvent
 {
     [Header("Налаштування сундука")]
     public int chestLevel = 1; // Рівень предметів, що випадають
@@ -13,10 +14,21 @@ public class Chest : MonoBehaviour
     public List<Gem> possibleGems;
     public List<Book> possibleBooks;
     public List<Weapon> possibleWeapons; // Використовується, якщо гарантованого меча немає
+    private bool open = false;
 
+    public override void OnInteract(PlayerDialogManager playerDialogManager)
+    {
+        if (open) return;
+
+        OpenChest(playerDialogManager.GetComponent<Inventory>());
+    }
 
     public void OpenChest(Inventory playerInventory)
     {
+
+        open = true;
+        GetComponent<Animation>().Play();
+        Destroy(gameObject, 1.5f);
         
 
         // Додаємо випадкові геми
@@ -55,5 +67,6 @@ public class Chest : MonoBehaviour
             playerInventory.AddItem(randomWeapon);
             Debug.Log($"В інвентар додано випадкову зброю: {randomWeapon.itemName}");
         }
+
     }
 }

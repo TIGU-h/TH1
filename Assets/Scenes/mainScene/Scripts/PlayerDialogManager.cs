@@ -8,23 +8,23 @@ public class PlayerDialogManager : MonoBehaviour
 {
     [Header("Interaction Settings")]
     [SerializeField] private float interactionRadius = 5f;
-    [SerializeField] private LayerMask npcLayer;
+    [SerializeField] private LayerMask FEventLayer;
 
     [Header("UI Settings")]
-    [SerializeField] private GameObject npcSelectionCanvas;
-    [SerializeField] private Transform npcListParent;
-    [SerializeField] private GameObject npcButtonPrefab;
+    [SerializeField] private GameObject FEventSelectionCanvas;
+    [SerializeField] private Transform FEventListParent;
+    [SerializeField] private GameObject FEventButtonPrefab;
 
     public Text nameField;
     public Text phraseField;
     public GameObject dialogOnCanvas;
 
-    private List<DialogPoint> nearbyNpcs = new List<DialogPoint>();
-    private Dictionary<DialogPoint, GameObject> npcButtons = new Dictionary<DialogPoint, GameObject>();
+    private List<FEvent> nearbyFEvents = new List<FEvent>();
+    private Dictionary<FEvent, GameObject> FEventButtons = new Dictionary<FEvent, GameObject>();
 
     private bool inDialogState = false;
     private int selectedButtonIndex = 0;
-    private List<Button> npcButtonList = new List<Button>();
+    private List<Button> FEventButtonList = new List<Button>();
 
     public bool InDialog
     {
@@ -46,36 +46,37 @@ public class PlayerDialogManager : MonoBehaviour
             GetComponent<PlayerMovementController>().enabled = !value;
             GetComponent<PlayerAttackAndSpellController>().enabled = !value;
             inDialogState = value;
+            UpdateFEventListUI();
         }
     }
 
     private void Start()
     {
-        StartCoroutine(UpdateNearbyNpcsCoroutine());
-        StartCoroutine(UpdateNpcListUICoroutine());
+        StartCoroutine(UpdateNearbyFEventsCoroutine());
+        StartCoroutine(UpdateFEventListUICoroutine());
     }
 
-    private IEnumerator UpdateNearbyNpcsCoroutine()
+    private IEnumerator UpdateNearbyFEventsCoroutine()
     {
         while (true)
         {
-            DetectNpcs();
+            DetectFEvents();
             yield return new WaitForSeconds(0.2f);
         }
     }
 
-    private IEnumerator UpdateNpcListUICoroutine()
+    private IEnumerator UpdateFEventListUICoroutine()
     {
         while (true)
         {
-            UpdateNpcListUI();
+            UpdateFEventListUI();
             yield return new WaitForSeconds(0.2f);
         }
     }
 
     private void Update()
     {
-        if (npcButtonList.Count > 0 && !InDialog)
+        if (FEventButtonList.Count > 0 && !InDialog)
         {
             float scroll = Input.GetAxis("Mouse ScrollWheel");
             if (scroll < 0)
@@ -88,106 +89,106 @@ public class PlayerDialogManager : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.F))
             {
-                npcButtonList[selectedButtonIndex].onClick.Invoke();
+                FEventButtonList[selectedButtonIndex].onClick.Invoke();
             }
         }
         SelectButton(selectedButtonIndex);
     }
 
-    private void DetectNpcs()
+    private void DetectFEvents()
     {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, interactionRadius, npcLayer);
-        List<DialogPoint> detectedNpcs = new List<DialogPoint>();
+        Collider[] colliders = Physics.OverlapSphere(transform.position, interactionRadius, FEventLayer);
+        List<FEvent> detectedFEvents = new List<FEvent>();
 
         foreach (Collider collider in colliders)
         {
-            DialogPoint dialogPoint = collider.GetComponent<DialogPoint>();
+            FEvent dialogPoint = collider.GetComponent<FEvent>();
             if (dialogPoint != null)
             {
-                detectedNpcs.Add(dialogPoint);
-                if (!nearbyNpcs.Contains(dialogPoint))
+                detectedFEvents.Add(dialogPoint);
+                if (!nearbyFEvents.Contains(dialogPoint))
                 {
-                    nearbyNpcs.Add(dialogPoint);
-                    AddNpcButton(dialogPoint);
+                    nearbyFEvents.Add(dialogPoint);
+                    AddFEventButton(dialogPoint);
                 }
             }
         }
 
-        for (int i = 0; i < nearbyNpcs.Count; i++)
+        for (int i = 0; i < nearbyFEvents.Count; i++)
         {
-            if (!detectedNpcs.Contains(nearbyNpcs[i]))
+            if (!detectedFEvents.Contains(nearbyFEvents[i]))
             {
-                RemoveNpcButton(nearbyNpcs[i]);
-                nearbyNpcs.RemoveAt(i);
+                RemoveFEventButton(nearbyFEvents[i]);
+                nearbyFEvents.RemoveAt(i);
             }
         }
     }
 
-    private void AddNpcButton(DialogPoint npc)
+    private void AddFEventButton(FEvent FEvent)
     {
-        if (!npcButtons.ContainsKey(npc))
+        if (!FEventButtons.ContainsKey(FEvent))
         {
-            GameObject npcButton = Instantiate(npcButtonPrefab, npcListParent);
-            Button buttonComponent = npcButton.GetComponent<Button>();
-            npcButton.GetComponentInChildren<Text>().text = npc.DialogPointName;
-            buttonComponent.onClick.AddListener(() => StartDialogWithNpc(npc));
-            npcButtons[npc] = npcButton;
-            npcButtonList.Add(buttonComponent);
+            GameObject FEventButton = Instantiate(FEventButtonPrefab, FEventListParent);
+            Button buttonComponent = FEventButton.GetComponent<Button>();
+            FEventButton.GetComponentInChildren<Text>().text = FEvent.DialogPointName;
+            buttonComponent.onClick.AddListener(() => FEvent.OnInteract(this));
+            FEventButtons[FEvent] = FEventButton;
+            FEventButtonList.Add(buttonComponent);
 
-            if (npcButtonList.Count == 1)
-            {
-                SelectButton(0);
-            }
-        }
-    }
-
-    private void RemoveNpcButton(DialogPoint npc)
-    {
-        if (npcButtons.ContainsKey(npc))
-        {
-            Button buttonToRemove = npcButtons[npc].GetComponent<Button>();
-            npcButtonList.Remove(buttonToRemove);
-            Destroy(npcButtons[npc]);
-            npcButtons.Remove(npc);
-
-            if (npcButtonList.Count > 0)
+            if (FEventButtonList.Count == 1)
             {
                 SelectButton(0);
             }
         }
     }
 
-    private void UpdateNpcListUI()
+    private void RemoveFEventButton(FEvent FEvent)
     {
-        npcSelectionCanvas.SetActive(npcButtons.Count > 0 && !InDialog);
+        if (FEventButtons.ContainsKey(FEvent))
+        {
+            Button buttonToRemove = FEventButtons[FEvent].GetComponent<Button>();
+            FEventButtonList.Remove(buttonToRemove);
+            Destroy(FEventButtons[FEvent]);
+            FEventButtons.Remove(FEvent);
 
-        //if (npcListParent.childCount > 0 && !npcButtons.ContainsValue(EventSystem.current.currentSelectedGameObject))        
+            if (FEventButtonList.Count > 0)
+            {
+                SelectButton(0);
+            }
+        }
+    }
+
+    private void UpdateFEventListUI()
+    {
+        FEventSelectionCanvas.SetActive(FEventButtons.Count > 0 && !InDialog);
+
+        //if (FEventListParent.childCount > 0 && !FEventButtons.ContainsValue(EventSystem.current.currentSelectedGameObject))        
         //    SelectButton(0);
 
     }
 
-    private void StartDialogWithNpc(DialogPoint npc)
+    private void StartDialogWithFEvent(DialogPoint FEvent)
     {
-        npc.startDialogWithPlayer(GetComponent<PlayerDialogManager>());
-        npcSelectionCanvas.SetActive(false);
+        FEvent.startDialogWithPlayer(GetComponent<PlayerDialogManager>());
+        //FEventSelectionCanvas.SetActive(false);
     }
 
     private void SelectButton(int index)
     {
-        if (npcButtonList.Count == 0) return;
+        if (FEventButtonList.Count == 0) return;
 
-        selectedButtonIndex = Mathf.Clamp(index, 0, npcButtonList.Count - 1);
-        EventSystem.current.SetSelectedGameObject(npcButtonList[selectedButtonIndex].gameObject);
+        selectedButtonIndex = Mathf.Clamp(index, 0, FEventButtonList.Count - 1);
+        EventSystem.current.SetSelectedGameObject(FEventButtonList[selectedButtonIndex].gameObject);
     }
 
     private void SelectNextButton()
     {
-        SelectButton((selectedButtonIndex + 1) % npcButtonList.Count);
+        SelectButton((selectedButtonIndex + 1) % FEventButtonList.Count);
     }
 
     private void SelectPreviousButton()
     {
-        SelectButton((selectedButtonIndex - 1 + npcButtonList.Count) % npcButtonList.Count);
+        SelectButton((selectedButtonIndex - 1 + FEventButtonList.Count) % FEventButtonList.Count);
     }
 
     private void OnDrawGizmosSelected()

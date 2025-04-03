@@ -62,6 +62,7 @@ public class CharacterStats : MonoBehaviour
             Stats.AttackPower += equippedWeapon.baseAttackPower;
             Stats.MaxHP += equippedWeapon.bonusStats.MaxHP;
         }
+        GetComponent<Health>().UpdateUI();
     }
 }
 [System.Serializable]

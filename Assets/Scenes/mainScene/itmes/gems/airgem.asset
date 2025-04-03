@@ -19,12 +19,15 @@ MonoBehaviour:
   gemLevel: 1
   statBonus:
     level: 0
+    scaleWithLevel: 0
     MaxHP: 0
     HP: 0
     AttackPower: 0
     energy: 0
   levelElementSprites:
-  - {fileID: 349637213, guid: 5f7a72b3df1eddb4282011dc70709a7f, type: 3}
-  - {fileID: 349637213, guid: 5f7a72b3df1eddb4282011dc70709a7f, type: 3}
-  - {fileID: 349637213, guid: 5f7a72b3df1eddb4282011dc70709a7f, type: 3}
-  - {fileID: 349637213, guid: 5f7a72b3df1eddb4282011dc70709a7f, type: 3}
+  - {fileID: 21300000, guid: 8f5627188ebaf52469dc9557e4c7115c, type: 3}
+  - {fileID: 21300000, guid: 3f7072e16fa839e468270c7ecf3712df, type: 3}
+  - {fileID: 21300000, guid: 4107af9154c8c5547974387a8a3dff10, type: 3}
+  - {fileID: 21300000, guid: 0bbb38647636cc64f988fe1a31ae850f, type: 3}
+  - {fileID: 21300000, guid: 4657b9d853b62f64cb1dacc437f9fb95, type: 3}
+  mainbuf: 0

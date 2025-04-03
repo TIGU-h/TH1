@@ -109,4 +109,22 @@ public class Health : MonoBehaviour
         Debug.Log($"{gameObject.name} помер!");
         // Додаткові дії при смерті (наприклад, вимкнення об'єкта)
     }
+
+    public void UpdateUI()
+    {
+        if (healthSlider != null && statsRef != null)
+        {
+            healthSlider.maxValue = statsRef.MaxHP;
+            healthSlider.value = statsRef.HP;
+
+            if (text != null)
+            {
+                text.text = statsRef.HP + "/" + statsRef.MaxHP;
+            }
+            if (level != null)
+            {
+                level.text = "Lv. " + statsRef.level;
+            }
+        }
+    }
 }

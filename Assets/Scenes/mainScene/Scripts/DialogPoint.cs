@@ -4,9 +4,8 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DialogPoint : MonoBehaviour
+public class DialogPoint : FEvent
 {
-    public string DialogPointName;
     [SerializeField] private Phrase[] phrases;
     float timePerCharacter = 0.05f;
 
@@ -46,6 +45,11 @@ public class DialogPoint : MonoBehaviour
         dialogManager.dialogOnCanvas.SetActive(false);
         dialogManager.InDialog = false;
 
+    }
+
+    public override void OnInteract(PlayerDialogManager playerDialogManager)
+    {
+        startDialogWithPlayer(playerDialogManager);
     }
 }
 
