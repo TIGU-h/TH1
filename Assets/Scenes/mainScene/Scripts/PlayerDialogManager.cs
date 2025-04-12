@@ -87,7 +87,7 @@ public class PlayerDialogManager : MonoBehaviour
             {
                 SelectPreviousButton();
             }
-            if (Input.GetKeyDown(KeyCode.F))
+            if (Input.GetButton("Submit"))
             {
                 FEventButtonList[selectedButtonIndex].onClick.Invoke();
             }
