@@ -32,9 +32,8 @@ public class DamageDiller : MonoBehaviour
     private bool wasEffect = false;
 
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
-        print(gameObject + ":::" + other.gameObject);
 
         if (haveToDelete)
         {
