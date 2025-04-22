@@ -53,6 +53,7 @@ public class EnemyAIBase : MonoBehaviour
     protected virtual void Die()
     {
         isDead = true;
+        target.GetComponent<CharacterStats>().GainExperience(Stats.level*10);
         StopAllCoroutines();
         ResetAllAnimatorParameters(animator);
         animator.SetTrigger("die");

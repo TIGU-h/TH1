@@ -7,13 +7,48 @@ public class CharacterStats : MonoBehaviour
     public Stats BaseStats;
     public Stats Stats;
 
+    private int currentExp;
+    private int expToNextLevel = 50;
+
     private Gem[] equippedGems = new Gem[4];
     private Weapon equippedWeapon;
 
     private void Awake()
     {
         Stats = new Stats();
+        Stats.level = BaseStats.level;
+        Stats.scaleWithLevel = BaseStats.scaleWithLevel;
+        Stats.MaxHP = BaseStats.MaxHP;
+        Stats.HP = BaseStats.HP;
+        Stats.AttackPower = BaseStats.AttackPower;
+        Stats.energy = BaseStats.energy;
         UpdateStats();
+    }
+
+    public void GainExperience(int amount)
+    {
+        currentExp += amount;
+
+        while (currentExp >= expToNextLevel)
+        {
+            currentExp -= expToNextLevel;
+            LevelUp();
+            expToNextLevel = CalculateExpToNextLevel(Stats.level);
+        }
+    }
+
+    private void LevelUp()
+    {
+        Stats.level++;
+        Stats.ScaleStatsByLevel();
+        Debug.Log("Level Up! Now at level: " + Stats.level);
+        UpdateStats();
+    }
+
+    private int CalculateExpToNextLevel(int level)
+    {
+        // Формула досвіду: 50 * рівень + 100
+        return expToNextLevel + 50 * level + 100;
     }
 
     public void EquipGem(Gem gem)
@@ -38,11 +73,7 @@ public class CharacterStats : MonoBehaviour
 
     private void UpdateStats()
     {
-        Stats.level = BaseStats.level;
-        Stats.MaxHP = BaseStats.MaxHP;
-        Stats.HP = BaseStats.HP;
-        Stats.AttackPower = BaseStats.AttackPower;
-        Stats.energy = BaseStats.energy;
+
 
         // Додаємо бонуси від каменів
         foreach (var gem in equippedGems)
