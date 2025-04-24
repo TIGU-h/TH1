@@ -6,12 +6,15 @@ using UnityEngine.UI;
 public class DialogPoint : FEvent
 {
     [SerializeField] private Phrase[] phrases;
+    [SerializeField] private AnimationClip startAnimation;
     private Animator characterAnimator; // Аніматор персонажа
     float timePerCharacter = 0.05f;
 
     private void Start()
     {
         characterAnimator = GetComponent<Animator>();
+
+        PlayAnimation(startAnimation);
     }
 
     public void startDialogWithPlayer(PlayerDialogManager dialogManager)
@@ -30,13 +33,12 @@ public class DialogPoint : FEvent
             dialogManager.phraseField.text = string.Empty;
 
             string[] characterPhrases = phrases[i].phrases;
-            string[] animations = phrases[i].animations;
 
             for (int k = 0; k < characterPhrases.Length; k++)
             {
                 string phrase = characterPhrases[k];
-                string animation = animations.Length > k ? animations[k] : "Idle";
-                PlayAnimation(animation);
+                if (k < phrases[i].animations.Length)
+                    PlayAnimation(phrases[i].animations[k]);
 
                 dialogManager.phraseField.text = string.Empty;
 
@@ -52,15 +54,16 @@ public class DialogPoint : FEvent
         }
 
         dialogManager.dialogOnCanvas.SetActive(false);
+        PlayAnimation(startAnimation); // Повернення до idle
+        yield return new WaitForSeconds(0.3f);
         dialogManager.InDialog = false;
-        PlayAnimation("Idle"); // Повернення до idle
     }
 
-    public void PlayAnimation(string animationName)
+    public void PlayAnimation(AnimationClip animation)
     {
-        if (characterAnimator != null)
+        if (characterAnimator != null && animation != null)
         {
-            characterAnimator.Play(animationName);
+            characterAnimator.Play(animation.name);
         }
     }
 
@@ -78,5 +81,5 @@ public class Phrase
     [SerializeField]
     public string[] phrases;
     [SerializeField]
-    public string[] animations; 
+    public AnimationClip[] animations;
 }

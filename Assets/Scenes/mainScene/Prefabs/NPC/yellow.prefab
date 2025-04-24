@@ -50,7 +50,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 498e849c230f0e04bbe2284f063b5436, type: 3}
       propertyPath: m_Name
-      value: green (1)
+      value: yellow
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 498e849c230f0e04bbe2284f063b5436, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: 498e849c230f0e04bbe2284f063b5436, type: 3}
       propertyPath: m_Controller
@@ -111,4 +115,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DialogPointName: 
   phrases: []
-  characterAnimator: {fileID: 0}
+  startAnimation: {fileID: 0}

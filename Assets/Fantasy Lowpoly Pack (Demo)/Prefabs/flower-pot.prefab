@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8703647127263497678}
   - component: {fileID: 5721343284537508459}
   - component: {fileID: 7530788434466322081}
-  - component: {fileID: 8756777385823112154}
+  - component: {fileID: 8413607842435324797}
   m_Layer: 0
   m_Name: flower-pot
   m_TagString: Untagged
@@ -26,13 +26,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8323285835354183540}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5721343284537508459
 MeshFilter:
@@ -84,17 +84,24 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &8756777385823112154
-MeshCollider:
+--- !u!65 &8413607842435324797
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8323285835354183540}
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
   m_IsTrigger: 0
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4357359501287597514, guid: b79b2ba9599500240921e90d5a67ae88, type: 3}
+  serializedVersion: 3
+  m_Size: {x: 1.6109262, y: 1.0527301, z: 0.7700305}
+  m_Center: {x: -0.020898432, y: 0.3377114, z: -0.00132671}
