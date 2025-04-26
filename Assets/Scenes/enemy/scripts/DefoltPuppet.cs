@@ -1,12 +1,13 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class DefoltPuppet : EnemyAIBase
 {
     [SerializeField] private AnimationClip idleClip;
 
-    [SerializeField] private AnimationClip normalAttack1;
-    [SerializeField] private AnimationClip normalAttack2;
+    [SerializeField] private AnimationClip normalAttack;
+    [SerializeField] private AnimationClip heavyAttack;
     [SerializeField] private AnimationClip fightingIdle;
     [SerializeField] private GameObject weapon;
 
@@ -19,7 +20,7 @@ public class DefoltPuppet : EnemyAIBase
         base.Start();
 
         changespellanim("enemy_idle", idleClip);
-        changespellanim("enemy|attack", normalAttack1);
+        changespellanim("enemy_attack", normalAttack);
         weapon.GetComponent<DamageDiller>().ActorStats = Stats;
     }
     protected override void ChangeIdleToDefolt()
@@ -37,7 +38,9 @@ public class DefoltPuppet : EnemyAIBase
         }
         animator.SetFloat("distance", distance);
         if (choosedAttack == -1)
-            choosedAttack = 0;// EnemyLoader.random.Next(0, 1);
+            choosedAttack = EnemyLoader.random.Next(0, 2);
+        print(choosedAttack);
+
 
 
         switch (choosedAttack)
@@ -47,11 +50,11 @@ public class DefoltPuppet : EnemyAIBase
                 if (!isAttacking)
                 {
                     animator.ResetTrigger("start window");
-                    changespellanim("enemy|attack", normalAttack1);
+                    changespellanim("enemy_attack", normalAttack);
 
 
 
-                    if (distance > 3)
+                    if (distance > normalAttackRange)
                     {
                         if (!animator.GetBool("run"))
                             animator.SetTrigger("start run");
@@ -76,19 +79,19 @@ public class DefoltPuppet : EnemyAIBase
                             window = false;
 
                             choosedAttack = -1;
-                        }, 5f));
+                        }, normalWindowDuriotion));
                     }, animator.GetCurrentAnimatorClipInfo(0)[0].clip.length - 0.5f));
 
                 }
                 else if (window)
                 {
                     agent.SetDestination(target.position);
-                    if (distance > 8)
+                    if (distance > maxFavoriteRange)
                     {
                         animator.SetTrigger("start run");
                         animator.SetBool("run", true);
                     }
-                    else if (distance < 5)
+                    else if (distance < minFavoriteRange)
                     {
                         animator.SetTrigger("start window");
                         animator.SetBool("run", false);
@@ -99,7 +102,59 @@ public class DefoltPuppet : EnemyAIBase
                 break;
 
             case 1:
-                choosedAttack = -1;
+                if (!isAttacking)
+                {
+                    animator.ResetTrigger("start window");
+                    //çàì³íþºìî àí³ìêó
+                    changespellanim("enemy combo attack", heavyAttack);
+
+
+                    //ï³äá³ãàºìî ÿêùî äàëåêî
+                    if (distance > heavyAttackRange)
+                    {
+                        if (!animator.GetBool("run"))
+                            animator.SetTrigger("start run");
+
+                        agent.SetDestination(target.position);
+                        animator.SetBool("run", true);
+                        return;
+                    }
+
+                    isAttacking = true;
+                    animator.SetBool("run", false);
+                    animator.SetTrigger("heavy attack");
+                    transform.LookAt(target);
+                    StartCoroutine(InvokeWithDelay(() =>
+                    {
+                        window = true;
+                        animator.SetTrigger("start window");
+
+                        StartCoroutine(InvokeWithDelay(() =>
+                        {
+                            isAttacking = false;
+                            window = false;
+
+                            choosedAttack = -1;
+                        }, heavyWindowDuriotion));
+                    }, animator.GetCurrentAnimatorClipInfo(0)[0].clip.length - 0.5f));
+
+                }
+                else if (window)
+                {
+                    agent.SetDestination(target.position);
+                    if (distance > maxFavoriteRange)
+                    {
+                        animator.SetTrigger("start run");
+                        animator.SetBool("run", true);
+                    }
+                    else if (distance < minFavoriteRange)
+                    {
+                        animator.SetTrigger("start window");
+                        animator.SetBool("run", false);
+
+                    }
+                }
+                //choosedAttack = -1;
                 break;
         }
     }

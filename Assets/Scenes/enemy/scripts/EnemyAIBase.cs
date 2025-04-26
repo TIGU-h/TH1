@@ -10,6 +10,8 @@ public class EnemyAIBase : MonoBehaviour
     [SerializeField] protected float lookRadius = 10f;
     [SerializeField] private float rotspeed = 1f;
     [SerializeField] private float timeForDie = 2f;
+
+
     public Stats Stats;
 
 
@@ -18,6 +20,14 @@ public class EnemyAIBase : MonoBehaviour
 
     protected Transform target;
     protected NavMeshAgent agent;
+
+    [SerializeField] protected int normalAttackRange;
+    [SerializeField] protected int heavyAttackRange;
+    [SerializeField] protected int minFavoriteRange;
+    [SerializeField] protected int maxFavoriteRange;
+    [SerializeField] protected int normalWindowDuriotion;
+    [SerializeField] protected int heavyWindowDuriotion;
+
     private int currentPatrolIndex = 0;
     private bool isChasing = false;
 
