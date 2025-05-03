@@ -19,6 +19,10 @@ public class EnemyAIBase : MonoBehaviour
     public bool isLoaded = false;
 
     protected Transform target;
+    public Transform getTarget()
+    {
+        return target;
+    }
     protected NavMeshAgent agent;
 
     [SerializeField] protected int normalAttackRange;
