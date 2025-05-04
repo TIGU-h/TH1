@@ -18,6 +18,7 @@ public class PlayerMovementController : MonoBehaviour
     private float velocity;
     private bool canJump = true;
     private bool canRotate = true;
+    private bool forcedStop = false;
 
 
 
@@ -33,6 +34,8 @@ public class PlayerMovementController : MonoBehaviour
     }
     private void Update()
     {
+        if (forcedStop)
+            return;
         ApplyGravity();
 
         animator.SetBool("isGrounded", characterController.isGrounded);
@@ -110,6 +113,29 @@ public class PlayerMovementController : MonoBehaviour
         velocity = jumpForce;
     }
 
+    public void ResetAnimatorParameters()
+    {
+        if (animator == null)
+        {
+            Debug.LogWarning("Animator is not assigned.");
+            return;
+        }
+
+        for (int i = 0; i < animator.parameterCount; i++)
+        {
+            AnimatorControllerParameter parameter = animator.GetParameter(i);
+            switch (parameter.type)
+            {
+                case AnimatorControllerParameterType.Trigger:
+                    animator.ResetTrigger(parameter.name);
+                    break;
+                case AnimatorControllerParameterType.Bool:
+                    animator.SetBool(parameter.name, false);
+                    break;
+            }
+        }
+    }
+
 
 
 
@@ -135,6 +161,12 @@ public class PlayerMovementController : MonoBehaviour
     public void ResetCanRotate()
     {
         canRotate = false;
+    }
+
+    public void ForsedStop()
+    {
+        ResetAnimatorParameters();
+        StartCoroutine(InvokeWithDelay(() => forcedStop = false, 0.2f));
     }
 
 

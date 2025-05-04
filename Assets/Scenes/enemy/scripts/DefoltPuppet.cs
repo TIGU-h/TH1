@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UIElements;
+using static UnityEngine.InputSystem.LowLevel.InputStateHistory;
 
 public class DefoltPuppet : EnemyAIBase
 {
@@ -9,6 +10,7 @@ public class DefoltPuppet : EnemyAIBase
     [SerializeField] private AnimationClip normalAttack;
     [SerializeField] private AnimationClip heavyAttack;
     [SerializeField] private AnimationClip fightingIdle;
+    [SerializeField] private AnimationClip[] randomMoves;
     [SerializeField] private GameObject weapon;
 
     private bool isAttacking = false;
@@ -21,6 +23,8 @@ public class DefoltPuppet : EnemyAIBase
 
         changespellanim("enemy_idle", idleClip);
         changespellanim("enemy_attack", normalAttack);
+        changespellanim("enemy_fight_idle", fightingIdle);
+
         weapon.GetComponent<DamageDiller>().ActorStats = Stats;
     }
     protected override void ChangeIdleToDefolt()
@@ -32,11 +36,15 @@ public class DefoltPuppet : EnemyAIBase
     {
         if (isInFight == false)
         {
+            ResetAnimatorParameters();
             changespellanim("enemy_idle", fightingIdle);
             isInFight = true;
 
         }
-        animator.SetFloat("distance", distance);
+
+        animator.SetBool("goBack", distance < minFavoriteRange);
+
+
         if (choosedAttack == -1)
             choosedAttack = EnemyLoader.random.Next(0, 2);
         print(choosedAttack);
@@ -77,6 +85,9 @@ public class DefoltPuppet : EnemyAIBase
                         {
                             isAttacking = false;
                             window = false;
+                            randomMoveIn();
+
+
 
                             choosedAttack = -1;
                         }, normalWindowDuriotion));
@@ -133,6 +144,7 @@ public class DefoltPuppet : EnemyAIBase
                         {
                             isAttacking = false;
                             window = false;
+                            randomMoveIn();
 
                             choosedAttack = -1;
                         }, heavyWindowDuriotion));
@@ -158,6 +170,21 @@ public class DefoltPuppet : EnemyAIBase
                 break;
         }
     }
+
+    private void randomMoveIn(float second=0)
+    {
+        AnimationClip anim =null;
+        if (randomMoves.Length > 0)
+        {
+            anim = randomMoves[Random.Range(0, randomMoves.Length)];
+            changespellanim("enemyStrafing", anim);
+        }
+
+        StartCoroutine(InvokeWithDelay(() => animator.SetTrigger("random move"), second));
+        
+    }
+
+
 
 
 

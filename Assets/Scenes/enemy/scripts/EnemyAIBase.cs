@@ -163,6 +163,7 @@ public class EnemyAIBase : MonoBehaviour
     }
     protected virtual void FightLogic(float distance)
     {
+
         isChasing = true;
         if (agent.remainingDistance < 3)
         {
@@ -262,6 +263,28 @@ public class EnemyAIBase : MonoBehaviour
             if (i < patrolPoints.Length - 1)
             {
                 Gizmos.DrawLine(patrolPoints[i].position, patrolPoints[i + 1].position);
+            }
+        }
+    }
+    public void ResetAnimatorParameters()
+    {
+        if (animator == null)
+        {
+            Debug.LogWarning("Animator is not assigned.");
+            return;
+        }
+
+        for (int i = 0; i < animator.parameterCount; i++)
+        {
+            AnimatorControllerParameter parameter = animator.GetParameter(i);
+            switch (parameter.type)
+            {
+                case AnimatorControllerParameterType.Trigger:
+                    animator.ResetTrigger(parameter.name);
+                    break;
+                case AnimatorControllerParameterType.Bool:
+                    animator.SetBool(parameter.name, false);
+                    break;
             }
         }
     }

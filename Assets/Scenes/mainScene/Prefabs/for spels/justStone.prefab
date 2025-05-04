@@ -254,6 +254,8 @@ MonoBehaviour:
   typeOfDamage: 2
   haveToDelete: 1
   ActorStats:
+    level: 0
+    scaleWithLevel: 2
     MaxHP: 0
     HP: 0
     AttackPower: 0
@@ -299,7 +301,7 @@ Rigidbody:
     m_Bits: 8388608
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 704
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
