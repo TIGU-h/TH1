@@ -58,6 +58,7 @@ public class CharacterStats : MonoBehaviour
             //if (equippedGems[(int)gem.element] != null)
             equippedGems[(int)gem.element] = gem;
 
+
             UpdateStats();
         }
     }
@@ -82,6 +83,7 @@ public class CharacterStats : MonoBehaviour
             {
                 Stats.MaxHP += gem.statBonus.MaxHP;
                 Stats.AttackPower += gem.statBonus.AttackPower;
+                Stats.elementProcentBuff[(int)gem.element] = gem.mainbuf;
 
             }
 
@@ -105,6 +107,8 @@ public class Stats
     public int HP;
     public int AttackPower;
     public float energy;
+
+    public int[] elementProcentBuff = new int[4];
 
     public void GenerateRandomStats(int itemLevel)
     {

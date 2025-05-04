@@ -10,7 +10,7 @@ public class speedSpell : SpellActionBase
         gameObject.GetComponent<ParticleSystem>().Play();
 
         var animator = eSpell.playerWhoCasting.GetComponent<Animator>();
-        StartCoroutine(InvokeWithDelay(() => animator.speed = 2, gameObject.GetComponent<ParticleSystem>().main.duration));
+        StartCoroutine(InvokeWithDelay(() => animator.speed = 2 + 2*eSpell.playerWhoCasting.GetComponent<CharacterStats>().Stats.elementProcentBuff[(int)Element.Air]/100 , gameObject.GetComponent<ParticleSystem>().main.duration));
         StartCoroutine(InvokeWithDelay(() => animator.speed = 1, 5.0f));
 
     }

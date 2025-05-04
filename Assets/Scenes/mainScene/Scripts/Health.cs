@@ -102,6 +102,14 @@ public class Health : MonoBehaviour
             text.text = statsRef.HP + "/" + statsRef.MaxHP;
         }
     }
+    public void HealProcent(int healAmountProcent)
+    {
+        SetCurrentHP(statsRef.HP + (statsRef.MaxHP / 100 * healAmountProcent));
+        if (text != null)
+        {
+            text.text = statsRef.HP + "/" + statsRef.MaxHP;
+        }
+    }
 
     private void Die()
     {

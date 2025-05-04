@@ -60,7 +60,11 @@ public class DamageDiller : MonoBehaviour
                 {
                     return;
                 }
-                int damage = (int)(attackScale * ActorStats.AttackPower) + 1;
+                int damage = (int)(attackScale * ActorStats.AttackPower);
+                if (typeOfDamage != TypeOfDamage.Phisical)
+                    damage  = (int)((float)damage * (1f + (ActorStats.elementProcentBuff[(int)typeOfDamage - 1]/100f)));
+                damage++;
+
 
                 hp.TakeDamage(damage);
                 if (canvasPrefab != null)

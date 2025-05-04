@@ -171,9 +171,9 @@ public class DefoltPuppet : EnemyAIBase
         }
     }
 
-    private void randomMoveIn(float second=0)
+    private void randomMoveIn(float second = 0)
     {
-        AnimationClip anim =null;
+        AnimationClip anim = null;
         if (randomMoves.Length > 0)
         {
             anim = randomMoves[Random.Range(0, randomMoves.Length)];
@@ -181,7 +181,7 @@ public class DefoltPuppet : EnemyAIBase
         }
 
         StartCoroutine(InvokeWithDelay(() => animator.SetTrigger("random move"), second));
-        
+
     }
 
 

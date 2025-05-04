@@ -679,7 +679,7 @@ MonoBehaviour:
   idleClip: {fileID: 7400000, guid: 3a23b64fe0848b64c80adff8e2847a97, type: 2}
   normalAttack: {fileID: 0}
   heavyAttack: {fileID: 0}
-  fightingIdle: {fileID: 7400000, guid: 4f3aad7dacea1f34cb082392ab2b4804, type: 2}
+  fightingIdle: {fileID: 7400000, guid: f91d04c37815486479759c422721673e, type: 2}
   randomMoves:
   - {fileID: 7400000, guid: 5ef4b0c5cb780ac479b66d3b926672eb, type: 2}
   - {fileID: 7400000, guid: df97685fc9357ba4ea05e448fa55a7f0, type: 2}

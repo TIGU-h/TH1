@@ -197,40 +197,42 @@ public class EnemyAIBase : MonoBehaviour
     }
 
 
+    // Клас повинен мати цей список
+    private List<KeyValuePair<AnimationClip, AnimationClip>> allOverrides = new List<KeyValuePair<AnimationClip, AnimationClip>>();
+
     protected void changespellanim(string name, AnimationClip newAnimation)
     {
         if (newAnimation == null) return;
         string stateName = name;
 
-        // Отримуємо існуючий RuntimeAnimatorController
+        // Отримуємо поточний контролер
         var runtimeAnimatorController = animator.runtimeAnimatorController;
 
-        // Створюємо AnimatorOverrideController на основі існуючого контролера
+        // Створюємо OverrideController
         var overrideController = new AnimatorOverrideController(runtimeAnimatorController);
 
-        // Замінюємо потрібний стан на нову анімацію
-        var overrides = new List<KeyValuePair<AnimationClip, AnimationClip>>(overrideController.overridesCount);
-        overrideController.GetOverrides(overrides);
+        // Отримуємо поточні оверрайди
+        var currentOverrides = new List<KeyValuePair<AnimationClip, AnimationClip>>(overrideController.overridesCount);
+        overrideController.GetOverrides(currentOverrides);
+
+        // Оновлюємо глобальний список, якщо він ще порожній
+        if (allOverrides.Count == 0)
+        {
+            allOverrides = new List<KeyValuePair<AnimationClip, AnimationClip>>(currentOverrides);
+        }
 
         int replaced = 0;
 
-
-        // Отримуємо список станів для кожного шару
-        var layerOverrides = new List<KeyValuePair<AnimationClip, AnimationClip>>(overrides);
-        overrideController.GetOverrides(layerOverrides);
-
-        for (int i = 0; i < layerOverrides.Count; i++)
+        for (int i = 0; i < allOverrides.Count; i++)
         {
-            if (layerOverrides[i].Key.name == stateName)
+            if (allOverrides[i].Key.name == stateName)
             {
-                layerOverrides[i] = new KeyValuePair<AnimationClip, AnimationClip>(layerOverrides[i].Key, newAnimation);
+                allOverrides[i] = new KeyValuePair<AnimationClip, AnimationClip>(allOverrides[i].Key, newAnimation);
                 replaced++;
             }
         }
 
-        // Замінюємо оригінальні оверрайди
-        overrideController.ApplyOverrides(layerOverrides);
-
+        overrideController.ApplyOverrides(allOverrides);
 
         if (replaced > 0)
         {
@@ -241,6 +243,7 @@ public class EnemyAIBase : MonoBehaviour
             Debug.LogError($"State '{stateName}' not found in the controller!");
         }
     }
+
 
 
     protected void LookAt(Transform lookAtTarget)

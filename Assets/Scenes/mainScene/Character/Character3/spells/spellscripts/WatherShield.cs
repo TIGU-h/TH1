@@ -9,6 +9,8 @@ public class WatherShield : SpellActionBase
         transform.GetChild(0).gameObject.SetActive(true);
         StartCoroutine(InvokeWithDelay(() => transform.GetChild(0).gameObject.SetActive(false), 10f));
         
+        eSpell.playerWhoCasting.GetComponent<Health>().HealProcent(eSpell.playerWhoCasting.GetComponent<CharacterStats>().Stats.elementProcentBuff[(int)Element.Wather] + 10);
+        
     }
 
     private IEnumerator InvokeWithDelay(System.Action method, float delay)
