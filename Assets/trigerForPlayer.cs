@@ -8,6 +8,7 @@ public class trigerForPlayer : MonoBehaviour
     public LayerMask targetLayer;
 
     public UnityEvent onPlayerEnter;
+    public UnityEvent onPlayerExit;
 
     public bool destroyAfterTrigger = false;
 
@@ -32,7 +33,10 @@ public class trigerForPlayer : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         if ((targetLayer.value & (1 << other.gameObject.layer)) != 0)
+        {
+            onPlayerExit.Invoke();
             hasTriggered = false;
+        }
 
     }
 
