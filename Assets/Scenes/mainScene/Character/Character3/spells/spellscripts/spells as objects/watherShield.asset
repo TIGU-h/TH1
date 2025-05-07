@@ -13,12 +13,16 @@ MonoBehaviour:
   m_Name: watherShield
   m_EditorClassIdentifier: 
   id: 2
-  name: wather shield
   description: 
   element: 0
   icon: {fileID: -742673347, guid: 5f7a72b3df1eddb4282011dc70709a7f, type: 3}
   cooldown: 12
   prefabs: []
+  sounds:
+  - {fileID: 8300000, guid: a6202b554c990094fb065f9b079d61ac, type: 3}
+  - {fileID: 8300000, guid: b32b9c25c6908554ab7db562f1e13b91, type: 3}
+  - {fileID: 8300000, guid: e3b6500caea189c4f938f232815d77cd, type: 3}
+  - {fileID: 8300000, guid: 94b347b1dfd029949b7be64aa2bed7e3, type: 3}
   newAnimationForPlayer: {fileID: 7400000, guid: 27aadbdd72785e44e9c3f09480c85064, type: 2}
   spellAction: {fileID: 2659912159211444857, guid: 071de082b6769194889e3769bca83f3a, type: 3}
   playerWhoCasting: {fileID: 0}

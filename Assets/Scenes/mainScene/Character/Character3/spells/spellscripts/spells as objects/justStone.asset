@@ -13,13 +13,15 @@ MonoBehaviour:
   m_Name: justStone
   m_EditorClassIdentifier: 
   id: 4
-  name: just stone
   description: 
   element: 1
   icon: {fileID: 781725700, guid: 5f7a72b3df1eddb4282011dc70709a7f, type: 3}
   cooldown: 4
   prefabs:
   - {fileID: 6865329669221106870, guid: 26dddc12dd3c5bc4fa9671b97a7e6cb8, type: 3}
+  sounds:
+  - {fileID: 8300000, guid: 2c7c13ec339da0a4d98b447307f5091e, type: 3}
+  - {fileID: 8300000, guid: c34be0b9f287067488d2c0cb4bbb6782, type: 3}
   newAnimationForPlayer: {fileID: 7400000, guid: dca316d46bad6b94c937eafecbad2314, type: 2}
   spellAction: {fileID: 1840283896696902309, guid: c243d6d044b3bc143bb0603986e157ac, type: 3}
   playerWhoCasting: {fileID: 0}

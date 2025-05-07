@@ -18,6 +18,10 @@ MonoBehaviour:
   icon: {fileID: 349637213, guid: 5f7a72b3df1eddb4282011dc70709a7f, type: 3}
   cooldown: 6
   prefabs: []
+  sounds:
+  - {fileID: 8300000, guid: 8dd206eb261263042a4c28295e3bd988, type: 3}
+  - {fileID: 8300000, guid: 930aaba87b6a5a54aa6a6ab45b5a6648, type: 3}
+  - {fileID: 8300000, guid: bbcf67c55197d124db36777d86f69fbd, type: 3}
   newAnimationForPlayer: {fileID: 7400000, guid: dbb30a55baadeb34685aebccea8ba4a3, type: 2}
   spellAction: {fileID: -5502650755550442679, guid: 4645cef049192824fb8dcca478804187, type: 3}
   playerWhoCasting: {fileID: 0}

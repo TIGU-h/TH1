@@ -18,6 +18,9 @@ public class ESpell : ScriptableObject
     private GameObject[] prefabs;
 
     [SerializeField]
+    private AudioClip[] sounds;
+
+    [SerializeField]
     public AnimationClip newAnimationForPlayer;
 
 
