@@ -7,6 +7,11 @@ public class speedSpell : SpellActionBase
 {
     public override void Cast(ESpell eSpell)
     {
+
+        if (eSpell.sounds != null)
+            for (int i = 0; i < eSpell.sounds.Length; i++)
+                MultiAudioSourcePlayer.PlaySound(eSpell.sounds[i]);
+
         gameObject.GetComponent<ParticleSystem>().Play();
 
         var animator = eSpell.playerWhoCasting.GetComponent<Animator>();

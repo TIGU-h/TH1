@@ -103,7 +103,7 @@ public class PlayerDialogManager : MonoBehaviour
         foreach (Collider collider in colliders)
         {
             FEvent dialogPoint = collider.GetComponent<FEvent>();
-            if (dialogPoint != null)
+            if (dialogPoint != null && dialogPoint.DialogPointName != string.Empty)
             {
                 detectedFEvents.Add(dialogPoint);
                 if (!nearbyFEvents.Contains(dialogPoint))

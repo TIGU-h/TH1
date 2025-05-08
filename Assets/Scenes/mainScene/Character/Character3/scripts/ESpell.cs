@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-[System.Serializable, CreateAssetMenu(fileName ="E_Spell")]
+[System.Serializable, CreateAssetMenu(fileName = "E_Spell")]
 
 public class ESpell : ScriptableObject
 {
@@ -17,8 +17,8 @@ public class ESpell : ScriptableObject
     [SerializeField]
     private GameObject[] prefabs;
 
-    [SerializeField]
-    private AudioClip[] sounds;
+
+    public AudioClip[] sounds;
 
     [SerializeField]
     public AnimationClip newAnimationForPlayer;
@@ -43,7 +43,7 @@ public class ESpell : ScriptableObject
         cooldown = eSpell.cooldown;
         prefabs = eSpell.prefabs ?? Array.Empty<GameObject>();
         newAnimationForPlayer = eSpell.newAnimationForPlayer;
-
+        sounds = eSpell.sounds ?? Array.Empty<AudioClip>();
 
         lastCastTime = -cooldown;
     }
@@ -62,6 +62,7 @@ public class ESpell : ScriptableObject
 
         lastCastTime = Time.time;
         spellAction?.Cast(this);
+        
 
     }
 
@@ -84,7 +85,7 @@ public class ESpell : ScriptableObject
     }
     public float GetTimeForCoolDown()
     {
-        return Time.time - lastCastTime ;
+        return Time.time - lastCastTime;
     }
     public float GetCoolDown()
     {
