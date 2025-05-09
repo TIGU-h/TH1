@@ -163,14 +163,14 @@ Material:
     - _Min: 0
     - _Mode: 0
     - _MultiplyOpacity: 1
-    - _NormalPower: 0.325
+    - _NormalPower: 1
     - _NormalPower1: 1
     - _NormalScale: 1
     - _NormalSpeed: 3
     - _NormalTiling: 0.05
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _RefractionPower: 2
+    - _RefractionPower: 1.5
     - _SmoothnessPower: 1
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
