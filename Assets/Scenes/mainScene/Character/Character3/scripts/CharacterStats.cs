@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CharacterStats : MonoBehaviour
 {
@@ -9,9 +10,11 @@ public class CharacterStats : MonoBehaviour
 
     private int currentExp;
     private int expToNextLevel = 50;
+    [SerializeField] Slider expBar;
 
     private Gem[] equippedGems = new Gem[4];
     private Weapon equippedWeapon;
+    [SerializeField] private StatsUI_Controller StatsUI_Controller;
 
     private void Awake()
     {
@@ -23,6 +26,11 @@ public class CharacterStats : MonoBehaviour
         Stats.AttackPower = BaseStats.AttackPower;
         Stats.energy = BaseStats.energy;
         UpdateStats();
+
+        expBar.maxValue=expToNextLevel;
+        expBar.value = currentExp;
+
+        StatsUI_Controller.StatsPlayer = this;
     }
 
     public void GainExperience(int amount)
@@ -35,6 +43,8 @@ public class CharacterStats : MonoBehaviour
             LevelUp();
             expToNextLevel = CalculateExpToNextLevel(Stats.level);
         }
+        expBar.maxValue = expToNextLevel;
+        expBar.value = currentExp;
     }
 
     private void LevelUp()
@@ -47,7 +57,6 @@ public class CharacterStats : MonoBehaviour
 
     private int CalculateExpToNextLevel(int level)
     {
-        // ‘ормула досв≥ду: 50 * р≥вень + 100
         return expToNextLevel + 50 * level + 100;
     }
 

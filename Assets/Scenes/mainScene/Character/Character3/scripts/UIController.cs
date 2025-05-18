@@ -5,8 +5,12 @@ using UnityEngine;
 public class UIController : MonoBehaviour
 {
     [SerializeField] private GameObject tabBar;
+    [SerializeField] private GameObject StatsPanel;
+    [SerializeField] private GameObject StatsCamera;
+
     public bool activeMouse = false;
     public bool draggingMouse = false;
+
     void Update()
     {
 
@@ -40,7 +44,15 @@ public class UIController : MonoBehaviour
         Cursor.visible = activeMouse;
         Cursor.lockState = draggingMouse?CursorLockMode.Confined : CursorLockMode.Locked;
 
+        if (Input.GetButtonUp("ShowStats"))
+        {
+            StatsPanel.SetActive(true);
+            StatsCamera.SetActive(true);
+            StatsPanel.GetComponent<StatsUI_Controller>().statsButton.onClick.Invoke();
 
+            activeMouse = true;
+            draggingMouse = true;
+        }
 
 
     }
