@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Android.Gradle;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,6 +19,19 @@ public class Inventory : MonoBehaviour
     [SerializeField] Button ShowWeaponsB;
     [SerializeField] GameObject ShowWeaponP;
     CharacterStats ch;
+
+
+    //********     LOG
+    public GameObject gemLogPrefab;
+    [SerializeField] private Sprite expLogItemSprite;
+
+    public Transform logContainer;
+    [SerializeField] private float logInterval = 0.3f;
+    [SerializeField] private float DestroyLogTime = 1f;
+
+    private Queue<System.Action> logQueue = new Queue<System.Action>();
+    private bool isLogging = false;
+
 
 
     private void Start()
@@ -41,6 +55,78 @@ public class Inventory : MonoBehaviour
         }
 
     }
+    /*
+     
+     
+    public void Log(Gem gem)
+    {
+        var logItem = Instantiate(gemLogPrefab, logContainer);
+        logItem.GetComponent<InventaryLogItem>().SetData(gem);
+        Destroy(logItem, 0.5f);
+
+    }
+    public void Log(int exp)
+    {
+        var logItem = Instantiate(gemLogPrefab, logContainer);
+        logItem.GetComponent<InventaryLogItem>().SetData(expLogItemSprite, "+"+exp);
+        Destroy(logItem, 0.5f);
+
+    }
+    
+     
+     */
+
+
+
+    public void Log(Gem gem)
+    {
+        logQueue.Enqueue(() => CreateGemLog(gem));
+        TryStartLogging();
+    }
+
+    public void Log(int exp)
+    {
+        logQueue.Enqueue(() => CreateExpLog(exp));
+        TryStartLogging();
+    }
+
+    private void TryStartLogging()
+    {
+        if (!isLogging)
+        {
+            StartCoroutine(ProcessLogQueue());
+        }
+    }
+
+    private IEnumerator ProcessLogQueue()
+    {
+        isLogging = true;
+
+        while (logQueue.Count > 0)
+        {
+            var logAction = logQueue.Dequeue();
+            logAction.Invoke();
+            yield return new WaitForSeconds(logInterval);
+        }
+
+        isLogging = false;
+    }
+
+    private void CreateGemLog(Gem gem)
+    {
+        var logItem = Instantiate(gemLogPrefab, logContainer);
+        logItem.GetComponent<InventaryLogItem>().SetData(gem);
+        Destroy(logItem, DestroyLogTime);
+    }
+
+    private void CreateExpLog(int exp)
+    {
+        var logItem = Instantiate(gemLogPrefab, logContainer);
+        logItem.GetComponent<InventaryLogItem>().SetData(expLogItemSprite, "+" + exp);
+        Destroy(logItem, DestroyLogTime);
+    }
+
+    //***************    LOG
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.B)) // Натискання клавіші "B"
@@ -81,6 +167,7 @@ public class Inventory : MonoBehaviour
         {
             Gem newGem = Instantiate(gem);
             gems.Add(newGem);
+            Log(gem);
         }
         else if (item is Book book)
         {

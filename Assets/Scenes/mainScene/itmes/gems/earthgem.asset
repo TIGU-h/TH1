@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f164e5c71a7bbef44bc7fae7b4db0591, type: 3}
   m_Name: earthgem
   m_EditorClassIdentifier: 
-  itemName: earthgem
+  itemName: Earth Talisman
   icon: {fileID: 349637213, guid: 5f7a72b3df1eddb4282011dc70709a7f, type: 3}
   element: 1
   useRandomStats: 1
@@ -24,6 +24,7 @@ MonoBehaviour:
     HP: 0
     AttackPower: 0
     energy: 0
+    elementProcentBuff: 00000000000000000000000000000000
   levelElementSprites:
   - {fileID: 21300000, guid: 38fb424b414da02438cef2f6f1a67e92, type: 3}
   - {fileID: 21300000, guid: 62578a281c7119c49a8abeaa7e7fd0c6, type: 3}

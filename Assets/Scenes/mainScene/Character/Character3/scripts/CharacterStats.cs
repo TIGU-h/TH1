@@ -45,6 +45,8 @@ public class CharacterStats : MonoBehaviour
         }
         expBar.maxValue = expToNextLevel;
         expBar.value = currentExp;
+
+        GetComponent<Inventory>().Log(amount);
     }
 
     private void LevelUp()

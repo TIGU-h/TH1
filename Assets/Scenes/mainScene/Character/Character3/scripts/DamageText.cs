@@ -12,7 +12,7 @@ public class DamageText : MonoBehaviour
     public void Setup(int damage, TypeOfDamage typeOfDamage)
     {
         textMesh.text = damage.ToString();
-        if (Camera.main.transform != null)
+        if (Camera.main != null)
             transform.LookAt(Camera.main.transform);
 
         textMesh.font = fontAssets[(int)typeOfDamage];

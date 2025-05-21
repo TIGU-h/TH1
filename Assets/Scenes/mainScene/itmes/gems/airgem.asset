@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f164e5c71a7bbef44bc7fae7b4db0591, type: 3}
   m_Name: airgem
   m_EditorClassIdentifier: 
-  itemName: Air gem
+  itemName: Air Talisman
   icon: {fileID: 349637213, guid: 5f7a72b3df1eddb4282011dc70709a7f, type: 3}
   element: 3
   useRandomStats: 1
@@ -24,6 +24,7 @@ MonoBehaviour:
     HP: 0
     AttackPower: 0
     energy: 0
+    elementProcentBuff: 00000000000000000000000000000000
   levelElementSprites:
   - {fileID: 21300000, guid: 8f5627188ebaf52469dc9557e4c7115c, type: 3}
   - {fileID: 21300000, guid: 3f7072e16fa839e468270c7ecf3712df, type: 3}

@@ -467,6 +467,7 @@ MonoBehaviour:
     HP: 0
     AttackPower: 0
     energy: 0
+    elementProcentBuff: 00000000000000000000000000000000
   effectScale: 0.3
 --- !u!1001 &8170138865497461543
 PrefabInstance:
@@ -1305,6 +1306,7 @@ MonoBehaviour:
     HP: 10000
     AttackPower: 100
     energy: 1
+    elementProcentBuff: 00000000000000000000000000000000
   isLoaded: 0
   normalAttackRange: 10
   heavyAttackRange: 10

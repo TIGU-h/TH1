@@ -25,6 +25,7 @@ public class Chest : FEvent
 
     public void OpenChest(Inventory playerInventory)
     {
+        playerInventory.GetComponent<CharacterStats>().GainExperience(chestLevel * chestLevel * 20);
 
         open = true;
         GetComponent<Animation>().Play();

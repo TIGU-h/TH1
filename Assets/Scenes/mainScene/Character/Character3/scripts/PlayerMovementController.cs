@@ -145,6 +145,7 @@ public class PlayerMovementController : MonoBehaviour
     {
         canJump = true;
         canRotate = true;
+        GetComponent<PlayerAttackAndSpellController>().SetCanAttack();
 
     }
     public void ResetCanEverything()

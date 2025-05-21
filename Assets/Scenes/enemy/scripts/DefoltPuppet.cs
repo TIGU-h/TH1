@@ -42,12 +42,10 @@ public class DefoltPuppet : EnemyAIBase
 
         }
 
-        animator.SetBool("goBack", distance < minFavoriteRange);
 
 
         if (choosedAttack == -1)
             choosedAttack = EnemyLoader.random.Next(0, 2);
-        print(choosedAttack);
 
 
 
@@ -74,6 +72,8 @@ public class DefoltPuppet : EnemyAIBase
 
                     isAttacking = true;
                     animator.SetBool("run", false);
+                    animator.ResetTrigger("start window");
+                    animator.SetBool("goBack", false);
                     animator.SetTrigger("normal attack");
                     transform.LookAt(target);
                     StartCoroutine(InvokeWithDelay(() =>
@@ -91,12 +91,13 @@ public class DefoltPuppet : EnemyAIBase
 
                             choosedAttack = -1;
                         }, normalWindowDuriotion));
-                    }, animator.GetCurrentAnimatorClipInfo(0)[0].clip.length - 0.5f));
-
+                    }, (normalAttack ==null? GetAnimationClipLength("enemy_attack") :normalAttack.length) - 0.05f));
                 }
                 else if (window)
                 {
                     agent.SetDestination(target.position);
+                    animator.SetBool("goBack", distance < minFavoriteRange);
+
                     if (distance > maxFavoriteRange)
                     {
                         animator.SetTrigger("start run");
@@ -133,6 +134,8 @@ public class DefoltPuppet : EnemyAIBase
 
                     isAttacking = true;
                     animator.SetBool("run", false);
+                    animator.ResetTrigger("start window");
+                    animator.SetBool("goBack", false);
                     animator.SetTrigger("heavy attack");
                     transform.LookAt(target);
                     StartCoroutine(InvokeWithDelay(() =>
@@ -148,11 +151,13 @@ public class DefoltPuppet : EnemyAIBase
 
                             choosedAttack = -1;
                         }, heavyWindowDuriotion));
-                    }, animator.GetCurrentAnimatorClipInfo(0)[0].clip.length - 0.5f));
+                    }, (heavyAttack == null ? GetAnimationClipLength("enemy combo attack") : normalAttack.length) - 0.05f));
 
                 }
                 else if (window)
                 {
+                    animator.SetBool("goBack", distance < minFavoriteRange);
+
                     agent.SetDestination(target.position);
                     if (distance > maxFavoriteRange)
                     {
@@ -185,7 +190,23 @@ public class DefoltPuppet : EnemyAIBase
     }
 
 
+    float GetAnimationClipLength(string clipName)
+    {
+        if (animator == null || animator.runtimeAnimatorController == null)
+            return -1f;
 
+        foreach (var clip in animator.runtimeAnimatorController.animationClips)
+        {
+            if (clip.name == clipName)
+            {
+                print(clip.name);
+
+                return clip.length;
+            }
+        }
+
+        return -1f; // якщо не знайдено
+    }
 
 
     public void WearponTrailOn(float AttackScale)
