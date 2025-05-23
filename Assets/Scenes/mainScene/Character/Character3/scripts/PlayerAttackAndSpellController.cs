@@ -32,6 +32,8 @@ public class PlayerAttackAndSpellController : MonoBehaviour
     [SerializeField] private Image CDimage;
     [SerializeField] private Text CDtext;
 
+    [SerializeField] private Button[] ElementButtons;
+
 
 
 
@@ -89,6 +91,9 @@ public class PlayerAttackAndSpellController : MonoBehaviour
 
         }
 
+        HandleSelection(0);
+
+
 
 
 
@@ -132,7 +137,42 @@ public class PlayerAttackAndSpellController : MonoBehaviour
         }
 
 
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            HandleSelection(0);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            HandleSelection(1);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            HandleSelection(2);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            HandleSelection(3);
+        }
+
+
+
+
+
     }
+
+    public void HandleSelection(int index)
+    {
+
+        for (int i = 0; i < ElementButtons.Length; i++)
+        {
+            float scale = (i == index) ? 1.5f : 1f;
+            ElementButtons[i].transform.localScale = new Vector3(scale, scale, 1f);
+        }
+        ChangeActiveESpell(index+1);
+    }
+
+
     private IEnumerator InvokeInLoopWithDelay(System.Action method, float delay)
     {
         while (true)
@@ -185,7 +225,7 @@ public class PlayerAttackAndSpellController : MonoBehaviour
 
     }
 
-    public void ChangeActiveESpell(int index)
+    private void ChangeActiveESpell(int index)
     {
         index %= 4;
         activeESpell = eSpells[index];
