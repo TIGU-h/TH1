@@ -1,25 +1,43 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
     [SerializeField] private GameObject tabBar;
     [SerializeField] private GameObject StatsPanel;
     [SerializeField] private GameObject StatsCamera;
-
+    [SerializeField] private PauseController PausePanel;
+    [SerializeField] private GameObject playerParent;
     public bool activeMouse = false;
     public bool draggingMouse = false;
 
     void Update()
     {
+        Cursor.visible = activeMouse;
+        Cursor.lockState = draggingMouse ? CursorLockMode.Confined : CursorLockMode.Locked;
+
+        if (playerParent.GetComponentInChildren<CinemachineBrain>() != null)
+        {
+            playerParent.GetComponentInChildren<CinemachineBrain>().enabled = !(activeMouse || draggingMouse);
+            //playerParent.GetComponentInChildren<PlayerAttackAndSpellController>().enabled = !(activeMouse || draggingMouse);
+        }
+        if (playerParent.GetComponentInChildren<PlayerMovementController>()!=null)
+        {
+            if((activeMouse || draggingMouse) && playerParent.GetComponentInChildren<PlayerMovementController>().enabled)
+                playerParent.GetComponentInChildren<PlayerMovementController>().ResetAnimatorParameters();
+            playerParent.GetComponentInChildren<PlayerMovementController>().enabled = !(activeMouse || draggingMouse);
+
+        }
 
         if (Input.GetButton("changeSkillType"))
         {
             tabBar.SetActive(true);
             draggingMouse = true;
             activeMouse = false;
-            
+
         }
         else if (Input.GetButtonDown("Enable cursor"))
         {
@@ -27,7 +45,7 @@ public class UIController : MonoBehaviour
             draggingMouse = true;
             activeMouse = true;
         }
-        else if(Input.GetButtonUp("Enable cursor"))
+        else if (Input.GetButtonUp("Enable cursor"))
         {
 
             draggingMouse = false;
@@ -41,8 +59,6 @@ public class UIController : MonoBehaviour
             activeMouse = false;
         }
 
-        Cursor.visible = activeMouse;
-        Cursor.lockState = draggingMouse?CursorLockMode.Confined : CursorLockMode.Locked;
 
         if (Input.GetButtonUp("ShowStats"))
         {
@@ -53,7 +69,17 @@ public class UIController : MonoBehaviour
             activeMouse = true;
             draggingMouse = true;
         }
+        if (Input.GetButtonUp("Cancel"))
+        {
+            Pause();
+        }
 
 
+
+    }
+    public void Pause()
+    {
+        PausePanel.gameObject.SetActive(true);
+        Time.timeScale = 0;
     }
 }

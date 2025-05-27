@@ -167,11 +167,19 @@ public class PlayerMovementController : MonoBehaviour
     public void ForsedStop()
     {
         ResetAnimatorParameters();
-        StartCoroutine(InvokeWithDelay(() => forcedStop = false, 0.2f));
+
+
+        StartCoroutine(InvokeWithDelay(() =>
+        {
+            if (this != null)
+                forcedStop = false;
+        }, 0.2f));
+
+
     }
 
 
-    
+
 
     private IEnumerator InvokeWithDelay(System.Action method, float delay)
     {
