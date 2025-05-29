@@ -33,6 +33,7 @@ public class PlayerAttackAndSpellController : MonoBehaviour
     [SerializeField] private Text CDtext;
 
     [SerializeField] private Button[] ElementButtons;
+    [SerializeField] private AudioClip[] normalAttackSounds;
 
 
 
@@ -188,6 +189,10 @@ public class PlayerAttackAndSpellController : MonoBehaviour
         GetComponent<PlayerAttackAndSpellController>().WearponOn();
         animator.SetTrigger("attack");
     }
+    public void playAttackSound()
+    {
+        MultiAudioSourcePlayer.PlaySound(normalAttackSounds[Random.Range(0, normalAttackSounds.Length)]);
+    }
 
 
     //CanNormalAttack
@@ -203,6 +208,7 @@ public class PlayerAttackAndSpellController : MonoBehaviour
     public void WearponOn()
     {
         weapon.SetActive(true);
+        playAttackSound();
     }
     public void WeaponOff()
     {

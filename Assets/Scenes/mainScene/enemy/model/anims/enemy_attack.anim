@@ -29653,6 +29653,13 @@ AnimationClip:
     floatParameter: 0.3
     intParameter: 0
     messageOptions: 0
+  - time: 0.8333333
+    functionName: playAttackSound
+    data: 
+    objectReferenceParameter: {fileID: 8300000, guid: aa1093b8514842f48bf08ea5d70307f7, type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 1.0833334
     functionName: WearponTrailOFF
     data: 
@@ -29665,6 +29672,13 @@ AnimationClip:
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0.2
+    intParameter: 0
+    messageOptions: 0
+  - time: 1.1833333
+    functionName: playAttackSound
+    data: 
+    objectReferenceParameter: {fileID: 8300000, guid: 946d9456bd87a674b87696cdfaf7934c, type: 3}
+    floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 1.3333334

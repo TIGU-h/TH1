@@ -20,7 +20,7 @@ MonoBehaviour:
   prefabs:
   - {fileID: 3768822205736152801, guid: e77b87cc81151304596fbcd37ebf3e68, type: 3}
   sounds:
-  - {fileID: 8300000, guid: e32a783acb995e24b987f5d981cfa7d8, type: 3}
+  - {fileID: 8300000, guid: 6058e9a5fbf2c2b45b6f316ea3d7fbc5, type: 3}
   newAnimationForPlayer: {fileID: 7400000, guid: abbc66ffccad51d4f9631b586cfc9e9d, type: 2}
   spellAction: {fileID: -3334163114025985291, guid: b8883db8334f7474ea348664e1c18de6, type: 3}
   playerWhoCasting: {fileID: 0}

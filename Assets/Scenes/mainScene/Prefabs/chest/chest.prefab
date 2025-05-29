@@ -216,6 +216,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1071e6383533b2f409e9c1663e5bf0fe, type: 2}
   possibleBooks: []
   possibleWeapons: []
+  OpenSound: {fileID: 8300000, guid: dca9892859fa6e245aabe6696f40630f, type: 3}
 --- !u!111 &5056835034446747776
 Animation:
   m_ObjectHideFlags: 0

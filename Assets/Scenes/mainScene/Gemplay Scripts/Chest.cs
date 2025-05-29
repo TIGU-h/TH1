@@ -15,6 +15,7 @@ public class Chest : FEvent
     public List<Book> possibleBooks;
     public List<Weapon> possibleWeapons; // Використовується, якщо гарантованого меча немає
     private bool open = false;
+    public AudioClip OpenSound;
 
     public override void OnInteract(PlayerDialogManager playerDialogManager)
     {
@@ -25,6 +26,7 @@ public class Chest : FEvent
 
     public void OpenChest(Inventory playerInventory)
     {
+        MultiAudioSourcePlayer.PlaySound(OpenSound);
         playerInventory.GetComponent<CharacterStats>().GainExperience(chestLevel * chestLevel * 20);
 
         open = true;

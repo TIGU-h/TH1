@@ -225,4 +225,18 @@ public class DefoltPuppet : EnemyAIBase
 
         method?.Invoke();
     }
+    public void playAttackSound(AudioClip audioClip)
+    {
+        if (audioClip == null) return;
+        if (GetComponent<AudioSource>() == null)
+        {
+            gameObject.AddComponent<AudioSource>();
+        }
+        GetComponent<AudioSource>().maxDistance = 20;
+        GetComponent<AudioSource>().spatialBlend = 1;
+
+
+        GetComponent<AudioSource>().clip = audioClip;
+        GetComponent<AudioSource>().Play();
+    }
 }

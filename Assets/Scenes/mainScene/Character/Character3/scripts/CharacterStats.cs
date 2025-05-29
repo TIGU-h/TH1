@@ -18,6 +18,9 @@ public class CharacterStats : MonoBehaviour
     [SerializeField] private StatsUI_Controller StatsUI_Controller;
     [SerializeField] private GameObject looseScreen;
 
+    [SerializeField] private AudioClip[] DeathSoundFX;
+    [SerializeField] private AudioClip DeathSoundBG;
+
 
     private void Awake()
     {
@@ -117,6 +120,8 @@ public class CharacterStats : MonoBehaviour
     {
         GetComponent<Health>().OnDeath -=die;
     }
+
+
     private void die()
     {
         GetComponent<PlayerAttackAndSpellController>().enabled = false;
@@ -128,6 +133,11 @@ public class CharacterStats : MonoBehaviour
         Cursor.lockState = CursorLockMode.Confined;
 
         GetComponent<Animator>().SetTrigger("die");
+
+        for (int i = 0; i < DeathSoundFX.Length; i++)
+        
+            MultiAudioSourcePlayer.PlaySound(DeathSoundFX[i]);
+        BgMusicController.Instance.PlayMusic(DeathSoundBG);
 
 
         looseScreen.SetActive(true);
