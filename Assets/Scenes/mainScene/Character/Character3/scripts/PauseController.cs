@@ -19,16 +19,11 @@ public class PauseController : MonoBehaviour
     public void ExitToMainMenu()
     {
         SceneManager.LoadScene(0);
+        Time.timeScale = 1.0f;
+
     }
     public void ExitButton()
     {
         Application.Quit();
-    }
-
-    private IEnumerator InvokeWithDelay(System.Action method, float delay)
-    {
-        yield return new WaitForSeconds(delay);
-
-        method?.Invoke();
     }
 }

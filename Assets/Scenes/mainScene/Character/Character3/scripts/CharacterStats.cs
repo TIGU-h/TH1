@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,6 +16,8 @@ public class CharacterStats : MonoBehaviour
     private Gem[] equippedGems = new Gem[4];
     private Weapon equippedWeapon;
     [SerializeField] private StatsUI_Controller StatsUI_Controller;
+    [SerializeField] private GameObject looseScreen;
+
 
     private void Awake()
     {
@@ -31,6 +34,8 @@ public class CharacterStats : MonoBehaviour
         expBar.value = currentExp;
 
         StatsUI_Controller.StatsPlayer = this;
+        GetComponent<Health>().OnDeath += die;
+
     }
 
     public void GainExperience(int amount)
@@ -107,6 +112,26 @@ public class CharacterStats : MonoBehaviour
             Stats.MaxHP += equippedWeapon.bonusStats.MaxHP;
         }
         GetComponent<Health>().UpdateUI();
+    }
+    private void OnDestroy()
+    {
+        GetComponent<Health>().OnDeath -=die;
+    }
+    private void die()
+    {
+        GetComponent<PlayerAttackAndSpellController>().enabled = false;
+        GetComponent<PlayerMovementController>().ResetAnimatorParameters();
+        GetComponent<PlayerMovementController>().enabled = false;
+
+        looseScreen.GetComponentInParent<UIController>().enabled = false;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.Confined;
+
+        GetComponent<Animator>().SetTrigger("die");
+
+
+        looseScreen.SetActive(true);
+        Destroy(gameObject, 2f);
     }
 }
 [System.Serializable]

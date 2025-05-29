@@ -42,7 +42,7 @@ public class EnemyAIBase : MonoBehaviour
     protected Animator animator;
     protected bool isInFight = false;
     private bool isDead = false;
-    
+
 
 
     protected virtual void Start()
@@ -63,11 +63,11 @@ public class EnemyAIBase : MonoBehaviour
 
 
     }
-    
+
     protected virtual void Die()
     {
         isDead = true;
-        target.GetComponent<CharacterStats>().GainExperience(Stats.level*10);
+        target.GetComponent<CharacterStats>().GainExperience(Stats.level * 10);
         StopAllCoroutines();
         ResetAllAnimatorParameters(animator);
         animator.SetTrigger("die");
@@ -93,10 +93,6 @@ public class EnemyAIBase : MonoBehaviour
         }
     }
 
-    private void OnDestroy()
-    {
-        GetComponent<Health>().OnDeath -= Die;
-    }
 
 
 
@@ -109,6 +105,13 @@ public class EnemyAIBase : MonoBehaviour
             enemyIdleCoroutine = StartCoroutine(EnemyIdleBehevior());
 
         isInFight = false;
+        player.GetComponent<Health>().OnDeath += UnloadEnemy;
+    }
+
+    private void OnDestroy()
+    {
+        if (target != null)
+            target.GetComponent<Health>().OnDeath -= UnloadEnemy;
     }
 
     public void UnloadEnemy()

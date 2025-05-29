@@ -79,6 +79,8 @@ public class UIController : MonoBehaviour
     }
     public void Pause()
     {
+        draggingMouse = true;
+        activeMouse = true;
         PausePanel.gameObject.SetActive(true);
         Time.timeScale = 0;
     }
