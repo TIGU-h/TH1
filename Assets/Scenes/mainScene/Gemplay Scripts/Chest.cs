@@ -30,7 +30,8 @@ public class Chest : FEvent
         playerInventory.GetComponent<CharacterStats>().GainExperience(chestLevel * chestLevel * 20);
 
         open = true;
-        GetComponent<Animation>().Play();
+        GetComponent<Animator>().SetTrigger("open");
+        //GetComponent<Animation>().Play();
         Destroy(gameObject, 1.5f);
         
 

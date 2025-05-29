@@ -145,7 +145,10 @@ public class Inventory : MonoBehaviour
     {
         if (inventoryUI != null)
         {
+
             bool isActive = !inventoryUI.activeSelf;
+            GetComponent<PlayerMovementController>().enabled = !isActive;
+            GetComponent<PlayerAttackAndSpellController>().enabled = !isActive;
 
             inventoryUI.GetComponentInParent<UIController>().activeMouse = isActive;
             inventoryUI.GetComponentInParent<UIController>().draggingMouse = isActive;

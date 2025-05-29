@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -24,6 +25,9 @@ public class DialogPoint : FEvent
 
     public IEnumerator DisplayDialog(PlayerDialogManager dialogManager)
     {
+        dialogManager.GetComponent<PlayerMovementController>().enabled = false;
+        dialogManager.GetComponent<PlayerAttackAndSpellController>().enabled = false;
+
         dialogManager.InDialog = true;
         dialogManager.dialogOnCanvas.SetActive(true);
 
@@ -54,6 +58,8 @@ public class DialogPoint : FEvent
         }
 
         dialogManager.dialogOnCanvas.SetActive(false);
+        dialogManager.GetComponent<PlayerMovementController>().enabled = true;
+        dialogManager.GetComponent<PlayerAttackAndSpellController>().enabled = true;
         PlayAnimation(startAnimation); // Повернення до idle
         yield return new WaitForSeconds(0.3f);
         dialogManager.InDialog = false;
