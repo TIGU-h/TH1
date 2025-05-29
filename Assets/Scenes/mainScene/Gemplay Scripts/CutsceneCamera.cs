@@ -38,55 +38,15 @@ public class CutsceneCamera : MonoBehaviour
         }
     }
 
-    [Header("Налаштування")]
-    public Image targetImage;
-    public float fadeDuration = 2f;
+    public float fadeAfter = 2f;
 
-    private float elapsed = 0f;
-    private Color originalColor;
-    private bool isFading = false;
+    
 
-    public void StartFade()
-    {
-        elapsed = 0f;
-        isFading = true;
-    }
-
-    void Update()
-    {
-        if (!isFading && targetImage == null) return;
-
-        elapsed += Time.deltaTime;
-        float alpha = Mathf.Lerp(originalColor.a, 0f, elapsed / fadeDuration);
-
-        targetImage.color = new Color(
-            originalColor.r,
-            originalColor.g,
-            originalColor.b,
-            alpha
-        );
-
-        if (elapsed >= fadeDuration)
-        {
-            isFading = false;
-            targetImage.color = new Color(
-                originalColor.r,
-                originalColor.g,
-                originalColor.b,
-                0f
-            );
-        }
-    }
+ 
 
     public void StartCatScene()
     {
 
-        if (targetImage != null)
-        {
-            originalColor = targetImage.color;
-            StartFade();
-
-        }
 
 
         currentGroupIndex = 0;
@@ -98,6 +58,7 @@ public class CutsceneCamera : MonoBehaviour
         CutsceneCanvas.SetActive(true);
         onCutsceneStart?.Invoke();
         StartCoroutine(PlayGroup(currentGroupIndex));
+        StartCoroutine(InvokeWithDelay(() => CutsceneCanvas.GetComponent<Animator>().SetTrigger("end"), fadeAfter));
     }
 
     private IEnumerator PlayGroup(int groupIndex)
@@ -153,7 +114,13 @@ public class CutsceneCamera : MonoBehaviour
         CutsceneCanvas.SetActive(false);
 
         onCutsceneEnd?.Invoke();
-        targetImage.color = Color.black;
         gameObject.SetActive(false);
+    }
+
+    private IEnumerator InvokeWithDelay(System.Action method, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        method?.Invoke();
     }
 }

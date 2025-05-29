@@ -9,6 +9,8 @@ public class PauseController : MonoBehaviour
     public void ContinueButton()
     {
         Time.timeScale = 1.0f;
+        GetComponentInParent<UIController>().activeMouse = false;
+        GetComponentInParent<UIController>().draggingMouse = false;
         GetComponent<Animator>().SetTrigger("exitpause");
     }
     public void ExitPause()
