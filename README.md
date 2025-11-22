@@ -1,6 +1,4 @@
-# ⚔️ 3D RPG — Thesis Prototype
-
-A third-person open-world RPG prototype developed as my **bachelor’s project**.  
+# ⚔️ 3D RPG. A third-person open-world RPG prototype developed as my **bachelor’s project**.  
 The game demonstrates a full set of core RPG mechanics: combat, magic, AI enemies, open world exploration, dialog trees, inventory, talisman system, progression, VFX, SFX, and an optimized architecture built in Unity.
 
 This prototype serves as a foundation for a future full-scale RPG and showcases my practical skills in gameplay programming, level design, UI/UX, optimization, and systems engineering.
